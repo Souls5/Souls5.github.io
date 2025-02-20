@@ -71,12 +71,16 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2025-02-20-仿牛客论坛项目" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2025/02/20/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2025-02-20T02:51:11.648Z" itemprop="datePublished">2025-02-20</time>
+    <a href="/2025/02/20/2025-02-20-%E4%BB%BF%E7%89%9B%E5%AE%A2%E8%AE%BA%E5%9D%9B%E9%A1%B9%E7%9B%AE/" class="article-date">
+  <time class="dt-published" datetime="2025-02-20T05:57:01.000Z" itemprop="datePublished">2025-02-20</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -85,7 +89,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/02/20/hello-world/">Hello World</a>
+      <a class="p-name article-title" href="/2025/02/20/2025-02-20-%E4%BB%BF%E7%89%9B%E5%AE%A2%E8%AE%BA%E5%9D%9B%E9%A1%B9%E7%9B%AE/">从零开始搭建仿牛客论坛项目</a>
     </h1>
   
 
@@ -93,27 +97,101 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="项目环境"><a href="#项目环境" class="headerlink" title="项目环境"></a>项目环境</h2><ul>
+<li>JDK9.0.4</li>
+<li>apache-maven-3.6.3</li>
+<li>SpringBoot 2.4.1</li>
+<li>Redis-x64-5.0.10</li>
+<li>Elasticsearch-7.9.3</li>
+<li>kafka_2.13-2.7.0</li>
+<li>wkhtmltopdf(⻓图⽣成⼯具)</li>
+<li>mysql 5.7(建议版本&gt;&#x3D;5.7)</li>
+</ul>
+<p><strong>SQL文件介绍</strong></p>
+<ul>
+<li>init_schema.sql –&gt; 建表sql</li>
+<li>init_data.sql –&gt; 初始化数据库数据SQL</li>
+<li>tables_mysql_innodb.sql –&gt; quarter定时任务表SQL</li>
+</ul>
+<h3 id="初识Spring-Boot，开发社区首页"><a href="#初识Spring-Boot，开发社区首页" class="headerlink" title="初识Spring Boot，开发社区首页"></a>初识Spring Boot，开发社区首页</h3><p><strong>技术架构</strong></p>
+<ul>
+<li>Spring Boot</li>
+<li>Spring、Spring MVC 、MyBatis</li>
+<li>Redis、Kafka(消息队列服务器)、Elasticsearch(搜索引擎)</li>
+<li>Spring Security、Spring Actuator</li>
+</ul>
+<p><strong>开发环境</strong></p>
+<ul>
+<li>构建工具：Apache Maven</li>
+<li>集成开发工具：IDEA</li>
+<li>数据库：MySQL、Redis</li>
+<li>应用服务器：Apache Tomcat</li>
+<li>版本控制工具：Git</li>
+</ul>
+<h5 id="Apache-Maven"><a href="#Apache-Maven" class="headerlink" title="Apache Maven"></a>Apache Maven</h5><ul>
+<li>可以帮助我们构建项目、管理项目中的jar包</li>
+<li>Maven仓库：存放构件的位置<ul>
+<li>本地仓库：默认是 ~&#x2F;.m2&#x2F;repository</li>
+<li>远程仓库：中央仓库、镜像仓库、私服仓库</li>
+</ul>
+</li>
+</ul>
+<p>Maven官网：<a target="_blank" rel="noopener" href="http://maven.apache.org/">http://maven.apache.org</a></p>
+<img src="/2025/02/20/2025-02-20-仿牛客论坛项目/1.png"  alt="1" style="zoom:67%;" />
+下载zip压缩包解压即可
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>默认访问的远程仓库为maven的中央仓库，改为阿里云的镜像仓库</p>
+<ul>
+<li><p>修改<code>D:\Environment\apache-maven-3.9.8\conf</code>路径下的配置文件<code>settings.xml</code></p>
+</li>
+<li><p>在<code>maven.aliyun.com</code>查找仓库路径，此处选用<br><a target="_blank" rel="noopener" href="https://maven.aliyun.com/repository/central">https://maven.aliyun.com/repository/central</a></p>
+</li>
+<li><p>在<code>&lt;mirrors&gt;  &lt;/mirrors&gt;</code> 中添加内容</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/central<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>maven默认采用命令行的方式访问，命令行工具<code>mvn.cmd</code>的默认路径是<code>D:\Environment\apache-maven-3.9.8\bin</code></p>
+</li>
+<li><p>将路径配到系统环境变量Path中</p>
+<img src="/2025/02/20/2025-02-20-仿牛客论坛项目/2.png"  alt="2" style="zoom:67%;" />
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>cmd中查看版本号，检查是否成功配置</p>
+<img src="/2025/02/20/2025-02-20-仿牛客论坛项目/3.png"  alt="3" style="zoom:67%;" />
+</li>
+<li><p>maven常用命令（创建、测试、编译）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">`创建项目`</span><br><span class="line">mvn archetype:generate -DgroupId=com.nowcoder.mavendemo01 -DartifactId=mavendemo01 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=<span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## archetype:generate 调用 Maven 的原型生成器</span></span><br><span class="line">以模板原型的方式生成一个文件</span><br><span class="line"><span class="comment">## -DgroupId=com.mycompany.app：组织ID，通常wei</span></span><br><span class="line"><span class="comment">## -DartifactId=my-app：指定项目的ID，项目目录名称也通常采用这个名称。</span></span><br><span class="line"><span class="comment">## -DarchetypeArtifactId=maven-archetype-quickstart：选择 Maven 快速入门原型，这个原型会生成一个简单的 Java 项目，包含基本的目录结构和示例代码（例如 App.java 和对应的测试类）。</span></span><br><span class="line"><span class="comment">## -DarchetypeVersion=1.5：指定使用的原型版本。</span></span><br><span class="line"><span class="comment">## -DinteractiveMode=false：关闭交互模式，所有必要的信息都通过命令行参数指定，不需要在运行过程中进一步输入</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>创建的项目目录如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">my-app</span><br><span class="line">|-- pom.xml</span><br><span class="line">`-- src</span><br><span class="line">    |-- main</span><br><span class="line">    |   `-- java</span><br><span class="line">    |       `-- com</span><br><span class="line">    |           `-- mycompany</span><br><span class="line">    |               `-- app</span><br><span class="line">    |                   `-- App.java</span><br><span class="line">    `-- <span class="built_in">test</span></span><br><span class="line">        `-- java</span><br><span class="line">            `-- com</span><br><span class="line">                `-- mycompany</span><br><span class="line">                    `-- app</span><br><span class="line">                        `-- AppTest.java</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>编译项目，切换到项目路径下（即含pom.xml文件的目录)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mvn compile <span class="comment">#编译项目</span></span><br><span class="line"><span class="comment">##编译后的结果在 D:\Work\workspace\mavendemo01\target 路径下</span></span><br><span class="line">mvn clean <span class="comment">#清除</span></span><br><span class="line">mvn clean compile <span class="comment">#先清除再编译</span></span><br><span class="line">mvn clean <span class="built_in">test</span> <span class="comment">##先清除再测试，test命令包含了compile</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h5 id="IntelliJ-IDEA"><a href="#IntelliJ-IDEA" class="headerlink" title="IntelliJ IDEA"></a>IntelliJ IDEA</h5><p>目前最流行的Java集成开发工具</p>
+<p><a target="_blank" rel="noopener" href="http://www.jetbrains.com/idea">http://www.jetbrains.com/idea</a></p>
+<p>安装参考：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44601637/article/details/126807513">https://blog.csdn.net/qq_44601637/article/details/126807513</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46381569/article/details/131121481">https://blog.csdn.net/m0_46381569/article/details/131121481</a></p>
+<p>在IDEA中配置Maven：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Future_yzx/article/details/140469886">https://blog.csdn.net/Future_yzx/article/details/140469886</a></p>
+<img src="/2025/02/20/2025-02-20-仿牛客论坛项目/4.png"  alt="4" style="zoom:67%;" />
+
+
+
+<h5 id="Spring-Initializr"><a href="#Spring-Initializr" class="headerlink" title="Spring Initializr"></a>Spring Initializr</h5><p><strong>创建 Spring Boot 项目的引导工具</strong></p>
+<p><a target="_blank" rel="noopener" href="https://start.spring.io/">https://start.spring.io</a></p>
+<p>项目依赖的包较多时，管理起来较麻烦</p>
+<p>Spring Initializr对各个项目常用的包进行了整合</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://souls5.github.io/2025/02/20/hello-world/" data-id="cm7cr5pob0005w8t55t8938af" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://souls5.github.io/2025/02/20/2025-02-20-%E4%BB%BF%E7%89%9B%E5%AE%A2%E8%AE%BA%E5%9D%9B%E9%A1%B9%E7%9B%AE/" data-id="cm7d74y2f00069wt50j1ohg30" data-title="从零开始搭建仿牛客论坛项目" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a></li></ul>
+
     </footer>
   </div>
   
@@ -148,7 +226,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="卡码八股训练营记录"><a href="#卡码八股训练营记录" class="headerlink" title="卡码八股训练营记录"></a>卡码八股训练营记录</h2><h3 id="Day01"><a href="#Day01" class="headerlink" title="Day01"></a>Day01</h3><h4 id="介绍一下TCP-IP模型和OSI模型的区别"><a href="#介绍一下TCP-IP模型和OSI模型的区别" class="headerlink" title="介绍一下TCP&#x2F;IP模型和OSI模型的区别"></a>介绍一下TCP&#x2F;IP模型和OSI模型的区别</h4><p><strong>TCP&#x2F;IP 模型与 OSI 模型的区别</strong></p>
+        <h3 id="Day01"><a href="#Day01" class="headerlink" title="Day01"></a>Day01</h3><h4 id="介绍一下TCP-IP模型和OSI模型的区别"><a href="#介绍一下TCP-IP模型和OSI模型的区别" class="headerlink" title="介绍一下TCP&#x2F;IP模型和OSI模型的区别"></a>介绍一下TCP&#x2F;IP模型和OSI模型的区别</h4><p><strong>TCP&#x2F;IP 模型与 OSI 模型的区别</strong></p>
 <table>
 <thead>
 <tr>
@@ -277,94 +355,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://souls5.github.io/2025/02/19/2025-02-19-%E5%8D%A1%E7%A0%81%E5%85%AB%E8%82%A1%E8%AE%AD%E7%BB%83%E8%90%A5%E8%AE%B0%E5%BD%95/" data-id="cm7cr5poc0006w8t5ar6pf9ac" data-title="卡码八股训练营记录" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://souls5.github.io/2025/02/19/2025-02-19-%E5%8D%A1%E7%A0%81%E5%85%AB%E8%82%A1%E8%AE%AD%E7%BB%83%E8%90%A5%E8%AE%B0%E5%BD%95/" data-id="cm7d74y2f00059wt5g6kq9xfo" data-title="卡码八股训练营记录" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%AB%E8%82%A1/" rel="tag">八股</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-your-post-title" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/02/18/your-post-title/" class="article-date">
-  <time class="dt-published" datetime="2025-02-18T05:07:01.000Z" itemprop="datePublished">2025-02-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/02/18/your-post-title/">your-post-title</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://souls5.github.io/2025/02/18/your-post-title/" data-id="cm7cr5pod0009w8t5eose6vzu" data-title="your-post-title" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2025-02-17-数据结构-数组相关算法题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="article-date">
-  <time class="dt-published" datetime="2025-02-17T04:00:00.000Z" itemprop="datePublished">2025-02-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">数据结构-数组相关算法题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><h5 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h5><h5 id="移除元素"><a href="#移除元素" class="headerlink" title="移除元素"></a>移除元素</h5><h5 id="有序数组的平方"><a href="#有序数组的平方" class="headerlink" title="有序数组的平方"></a>有序数组的平方</h5><h5 id="长度最小的子数组-滑动窗口"><a href="#长度最小的子数组-滑动窗口" class="headerlink" title="长度最小的子数组 &#x2F; 滑动窗口"></a>长度最小的子数组 &#x2F; 滑动窗口</h5><h5 id="螺旋矩阵"><a href="#螺旋矩阵" class="headerlink" title="螺旋矩阵"></a>螺旋矩阵</h5><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://programmercarl.com/">https://programmercarl.com</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://souls5.github.io/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" data-id="cm7cr5po80001w8t5878mb5ak" data-title="数据结构-数组相关算法题" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
 
     </footer>
   </div>
@@ -474,11 +469,56 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://souls5.github.io/2025/02/17/2025-02-17-Redis/" data-id="cm7cr5poa0004w8t5d4o39ctu" data-title="Redis" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://souls5.github.io/2025/02/17/2025-02-17-Redis/" data-id="cm7d74y2b00019wt5bjr34mm7" data-title="Redis" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2025-02-17-数据结构-数组相关算法题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2025-02-17T04:00:00.000Z" itemprop="datePublished">2025-02-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">数据结构-数组相关算法题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><h5 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h5><h5 id="移除元素"><a href="#移除元素" class="headerlink" title="移除元素"></a>移除元素</h5><h5 id="有序数组的平方"><a href="#有序数组的平方" class="headerlink" title="有序数组的平方"></a>有序数组的平方</h5><h5 id="长度最小的子数组-滑动窗口"><a href="#长度最小的子数组-滑动窗口" class="headerlink" title="长度最小的子数组 &#x2F; 滑动窗口"></a>长度最小的子数组 &#x2F; 滑动窗口</h5><h5 id="螺旋矩阵"><a href="#螺旋矩阵" class="headerlink" title="螺旋矩阵"></a>螺旋矩阵</h5><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://programmercarl.com/">https://programmercarl.com</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://souls5.github.io/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" data-id="cm7d74y2e00049wt54gezh72b" data-title="数据结构-数组相关算法题" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
 
     </footer>
   </div>
@@ -576,7 +616,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://souls5.github.io/2025/02/16/2025-02-16-VMware%E4%B8%8B%E9%85%8D%E7%BD%AEUbuntu-Server22.04.1%E5%B9%B6%E5%AE%89%E8%A3%85Redis/" data-id="cm7cr5po50000w8t56lp89ew0" data-title="VMware下配置Ubuntu-Server22.04.1并安装Redis" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://souls5.github.io/2025/02/16/2025-02-16-VMware%E4%B8%8B%E9%85%8D%E7%BD%AEUbuntu-Server22.04.1%E5%B9%B6%E5%AE%89%E8%A3%85Redis/" data-id="cm7d74y2800009wt5g4dnes28" data-title="VMware下配置Ubuntu-Server22.04.1并安装Redis" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -600,7 +640,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%85%8D%E7%BD%AE/">配置</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%85%8D%E7%BD%AE/">配置</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li></ul>
     </div>
   </div>
 
@@ -610,7 +650,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AB%E8%82%A1/" rel="tag">八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AB%E8%82%A1/" rel="tag">八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a></li></ul>
     </div>
   </div>
 
@@ -620,7 +660,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Redis/" style="font-size: 20px;">Redis</a> <a href="/tags/Ubuntu/" style="font-size: 20px;">Ubuntu</a> <a href="/tags/%E5%85%AB%E8%82%A1/" style="font-size: 10px;">八股</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Redis/" style="font-size: 20px;">Redis</a> <a href="/tags/Ubuntu/" style="font-size: 20px;">Ubuntu</a> <a href="/tags/%E5%85%AB%E8%82%A1/" style="font-size: 10px;">八股</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">项目</a>
     </div>
   </div>
 
@@ -642,7 +682,7 @@
       <ul>
         
           <li>
-            <a href="/2025/02/20/hello-world/">Hello World</a>
+            <a href="/2025/02/20/2025-02-20-%E4%BB%BF%E7%89%9B%E5%AE%A2%E8%AE%BA%E5%9D%9B%E9%A1%B9%E7%9B%AE/">从零开始搭建仿牛客论坛项目</a>
           </li>
         
           <li>
@@ -650,7 +690,7 @@
           </li>
         
           <li>
-            <a href="/2025/02/18/your-post-title/">your-post-title</a>
+            <a href="/2025/02/17/2025-02-17-Redis/">Redis</a>
           </li>
         
           <li>
@@ -658,7 +698,7 @@
           </li>
         
           <li>
-            <a href="/2025/02/17/2025-02-17-Redis/">Redis</a>
+            <a href="/2025/02/16/2025-02-16-VMware%E4%B8%8B%E9%85%8D%E7%BD%AEUbuntu-Server22.04.1%E5%B9%B6%E5%AE%89%E8%A3%85Redis/">VMware下配置Ubuntu-Server22.04.1并安装Redis</a>
           </li>
         
       </ul>
