@@ -17,8 +17,9 @@
 <meta property="og:image" content="https://souls5.github.io/2025/02/20/2025-02-20-%E4%BB%BF%E7%89%9B%E5%AE%A2%E8%AE%BA%E5%9D%9B%E9%A1%B9%E7%9B%AE/2.png">
 <meta property="og:image" content="https://souls5.github.io/2025/02/20/2025-02-20-%E4%BB%BF%E7%89%9B%E5%AE%A2%E8%AE%BA%E5%9D%9B%E9%A1%B9%E7%9B%AE/3.png">
 <meta property="og:image" content="https://souls5.github.io/2025/02/20/2025-02-20-%E4%BB%BF%E7%89%9B%E5%AE%A2%E8%AE%BA%E5%9D%9B%E9%A1%B9%E7%9B%AE/4.png">
+<meta property="og:image" content="https://souls5.github.io/2025/02/20/2025-02-20-%E4%BB%BF%E7%89%9B%E5%AE%A2%E8%AE%BA%E5%9D%9B%E9%A1%B9%E7%9B%AE/5-1740051375382.png">
 <meta property="article:published_time" content="2025-02-20T05:57:01.000Z">
-<meta property="article:modified_time" content="2025-02-20T10:24:07.379Z">
+<meta property="article:modified_time" content="2025-02-20T11:38:19.400Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="项目">
 <meta property="article:tag" content="Java">
@@ -190,12 +191,22 @@
 <h5 id="Spring-Initializr"><a href="#Spring-Initializr" class="headerlink" title="Spring Initializr"></a>Spring Initializr</h5><p><strong>创建 Spring Boot 项目的引导工具</strong></p>
 <p><a target="_blank" rel="noopener" href="https://start.spring.io/">https://start.spring.io</a></p>
 <p>项目依赖的包较多时，管理起来较麻烦</p>
-<p>Spring Initializr对各个项目常用的包进行了整合</p>
+<p>Spring Initializr对项目常用的包进行了整合，按照功能&#x2F;需求进行分类<br><img src="/2025/02/20/2025-02-20-仿牛客论坛项目/5-1740051375382.png"  alt="5" style="zoom:67%;" /></p>
+<ul>
+<li><p>AOP 模块，你可以在项目生成后，直接在 Maven 的 POM 文件中添加 AOP 依赖。在 <code>&lt;dependencies&gt;</code> 标签中添加以下内容</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="Spring-Boot-入门示例"><a href="#Spring-Boot-入门示例" class="headerlink" title="Spring Boot 入门示例"></a>Spring Boot 入门示例</h4><ul>
+<li>Spring Boot 核心作用<ul>
+<li>起步依赖、自动配置、端点监控</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://souls5.github.io/2025/02/20/2025-02-20-%E4%BB%BF%E7%89%9B%E5%AE%A2%E8%AE%BA%E5%9D%9B%E9%A1%B9%E7%9B%AE/" data-id="cm7d74y2f00069wt50j1ohg30" data-title="从零开始搭建仿牛客论坛项目" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://souls5.github.io/2025/02/20/2025-02-20-%E4%BB%BF%E7%89%9B%E5%AE%A2%E8%AE%BA%E5%9D%9B%E9%A1%B9%E7%9B%AE/" data-id="cm7ee9nsg000uu4t5gmysgorj" data-title="从零开始搭建仿牛客论坛项目" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -277,11 +288,11 @@
           </li>
         
           <li>
-            <a href="/2025/02/17/2025-02-17-Redis/">Redis</a>
+            <a href="/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">数据结构-数组相关算法题</a>
           </li>
         
           <li>
-            <a href="/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">数据结构-数组相关算法题</a>
+            <a href="/2025/02/17/2025-02-17-Redis/">Redis</a>
           </li>
         
           <li>
