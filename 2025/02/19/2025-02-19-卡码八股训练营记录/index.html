@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://souls5.github.io/2025/02/19/2025-02-19-%E5%8D%A1%E7%A0%81%E5%85%AB%E8%82%A1%E8%AE%AD%E7%BB%83%E8%90%A5%E8%AE%B0%E5%BD%95/1.png">
 <meta property="article:published_time" content="2025-02-19T09:57:01.000Z">
-<meta property="article:modified_time" content="2025-02-23T07:52:39.092Z">
+<meta property="article:modified_time" content="2025-02-24T05:53:48.865Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="面试">
 <meta property="article:tag" content="八股">
@@ -243,15 +243,35 @@
 </li>
 <li><p><strong>请求头</strong>（Request Headers）：提供额外的信息，例如浏览器类型、缓存策略等</p>
 <ul>
-<li>常见请求头字段：<ul>
+<li><p>常见请求头字段：</p>
+<ul>
+<li><p><strong>客户端环境&#x2F;请求资源</strong></p>
+<ul>
 <li><code>Host</code>：请求的服务器域名（必须字段）</li>
 <li><code>User-Agent</code>：客户端信息（如浏览器、操作系统）</li>
 <li><code>Accept</code>：客户端能接受的数据类型（如 <code>text/html</code>）</li>
 <li><code>Accept-Encoding</code>：支持的压缩格式（如 <code>gzip</code>）</li>
+</ul>
+</li>
+<li><p><strong>身份认证与安全</strong></p>
+<ul>
 <li><code>Authorization</code>：身份认证信息（如 <code>Bearer Token</code>）</li>
-<li><code>Cookie</code>：发送存储在客户端的 Cookie</li>
+</ul>
+</li>
+<li><p><strong>缓存控制</strong></p>
+<ul>
+<li><code>If-None-Match </code> &#x2F; <code> If-Modified-Since</code>：资源的ETag &#x2F; 最后修改时间 值，用于缓存控制。</li>
+</ul>
+</li>
+<li><p><strong>请求内容描述</strong></p>
+<ul>
 <li><code>Content-Length</code>：请求体的长度（仅适用于带请求体的方法）</li>
 <li><code>Content-Type</code>：请求体的媒体类型（如 <code>application/json</code>）</li>
+<li><code>Cookie</code>：发送存储在客户端的 Cookie</li>
+</ul>
+</li>
+<li><p><code>Connection</code>：管理连接的选项，如 keep-alive</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -282,14 +302,33 @@
 </li>
 <li><p><strong>响应头</strong>（Response Headers）：提供额外信息，如内容类型、缓存控制等</p>
 <ul>
-<li>常见响应头字段<ul>
+<li><p>常见响应头字段</p>
+<ul>
+<li><p><strong>重定向</strong></p>
+<ul>
+<li><code>Location</code>：重定向地址（适用于 301、302）</li>
+</ul>
+</li>
+<li><p><strong>描述响应内容</strong></p>
+<ul>
 <li><code>Content-Type</code>：返回数据的 MIME 类型（如 <code>text/html</code>）</li>
 <li><code>Content-Length</code>：响应体长度（字节）</li>
+</ul>
+</li>
+<li><p><strong>控制缓存</strong></p>
+<ul>
+<li><code>Expires</code>：指定响应的过期时间，用于缓存控制。</li>
+<li><code>ETag</code>：资源的实体标签，用于缓存验证。</li>
+<li><code>Last-Modified</code>：资源最后修改的日期和时间。</li>
+</ul>
+</li>
+<li><p><strong>管理连接和安全</strong></p>
+<ul>
 <li><code>Server</code>：服务器软件信息（如 <code>nginx/1.18.0</code>）</li>
 <li><code>Set-Cookie</code>：设置 Cookie</li>
-<li><code>Expires</code>：缓存过期时间</li>
-<li><code>ETag</code>：实体标签，用于缓存机制</li>
-<li><code>Location</code>：重定向地址（适用于 301、302）</li>
+<li><code>Access-Control-Allow-Origin</code>：指示哪些域名可以访问资源，涉及跨域资源共享（CORS）策略</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -532,7 +571,7 @@
 
 
 <h5 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h5><ul>
-<li><p>Last-Modified</p>
+<li><p><strong>Last-Modified</strong></p>
 <p> <code>Last-Modified</code> 是服务器在响应中返回的头部字段，用来指示资源的最后修改时间。它通常以 GMT 时间格式表示。</p>
 <p> 客户端在后续请求时，可以使用 <code>If-Modified-Since</code> 请求头将之前获取的 <code>Last-Modified</code> 值发送给服务器。如果资源自该时间之后没有更新，服务器可以返回 <code>304 Not Modified</code> 状态，从而避免不必要的数据传输。</p>
 </li>
@@ -550,7 +589,104 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ETag: <span class="string">&quot;686897696a7c876b7e&quot;</span></span><br><span class="line"><span class="comment">## 表示该资源当前的版本标识符，后续可以利用此值进行缓存验证。</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <p><code>浏览器使用缓存流程</code><br><img src="/2025/02/19/2025-02-19-卡码八股训练营记录/1.png"  alt="1" style="zoom:67%;" /></p>
-<h3 id="Day04"><a href="#Day04" class="headerlink" title="Day04"></a>Day04</h3><h4 id="HTTP1-0和HTTP1-1的区别"><a href="#HTTP1-0和HTTP1-1的区别" class="headerlink" title="HTTP1.0和HTTP1.1的区别"></a>HTTP1.0和HTTP1.1的区别</h4><h4 id="HTTP2-0与HTTP1-1的区别？"><a href="#HTTP2-0与HTTP1-1的区别？" class="headerlink" title="HTTP2.0与HTTP1.1的区别？"></a>HTTP2.0与HTTP1.1的区别？</h4><h4 id="HTTP3-0有了解过吗？"><a href="#HTTP3-0有了解过吗？" class="headerlink" title="HTTP3.0有了解过吗？"></a>HTTP3.0有了解过吗？</h4>
+<h3 id="Day04"><a href="#Day04" class="headerlink" title="Day04"></a>Day04</h3><h4 id="HTTP1-0和HTTP1-1的区别"><a href="#HTTP1-0和HTTP1-1的区别" class="headerlink" title="HTTP1.0和HTTP1.1的区别"></a>HTTP1.0和HTTP1.1的区别</h4><ul>
+<li><strong>连接管理</strong><ul>
+<li><em>HTTP&#x2F;1.0</em>：默认使用<strong>短连接</strong>，每次请求&#x2F;响应后关闭 TCP 连接；<br>可以通过 <code>Connection: keep-alive</code> 来实现持久连接</li>
+<li><em>HTTP&#x2F;1.1</em>：默认启用<strong>持久连接</strong>（<code>Connection</code>字段值默认为<code>keep-alive</code>），<br>在同一 TCP 连接上可以连续发送多个请求和响应，减少了连接建立和关闭的开销。</li>
+</ul>
+</li>
+<li><strong>管道化</strong><ul>
+<li><em>HTTP&#x2F;1.0</em>：客户端的每次请求都需要在上一次请求的响应到达之后发送，请求发送有等待时间</li>
+<li><em>HTTP&#x2F;1.1</em>：支持<strong>管道化</strong>，即同一连接上可以连续发送多个请求，<br>但由于服务器必须按顺序返回响应（队头阻塞问题），实际效果有限</li>
+</ul>
+</li>
+<li><strong>缓存控制</strong><ul>
+<li><em>HTTP&#x2F;1.0</em>：主要依赖 <code>Expires</code> 头来指定资源的绝对过期时间，没有协商缓存机制</li>
+<li><em>HTTP&#x2F;1.1</em>：引入了 <code>Cache-Control </code>头提供更精细的缓存指令,通过 <code>If-Modified-Since </code>和 <code>If-None-Match </code>等头实现协商缓存</li>
+</ul>
+</li>
+<li><strong>错误处理和状态码</strong><br><strong>HTTP&#x2F;1.1</strong>增加了状态码（如 <code>100 Continue</code>）用于中间响应和更精细的错误处理，<br>使客户端能更好地管理请求过程和错误恢复</li>
+<li><strong>请求头要求</strong><br><strong>HTTP&#x2F;1.1</strong>要求所有请求必须包含 <code>Host</code> 头  —&gt;  一台服务器&#x2F;一个IP 上可托管多个 域名&#x2F;网站</li>
+<li><strong>带宽优化</strong><ul>
+<li><em>HTTP&#x2F;1.0</em>：不支持断点续传功能，客户端只需要某个对象的一部分时，服务器也会将整个对象发送过来</li>
+<li><em>HTTP&#x2F;1.1</em>：在请求头引入了<code>range</code>头域，允许只请求资源的某个部分，此时服务器返回状态码<code>206</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="HTTP2-0与HTTP1-1的区别？"><a href="#HTTP2-0与HTTP1-1的区别？" class="headerlink" title="HTTP2.0与HTTP1.1的区别？"></a>HTTP2.0与HTTP1.1的区别？</h4><ul>
+<li><p><strong>二进制协议</strong></p>
+<ul>
+<li>HTTP&#x2F;1.1：请求和响应内容都是以纯文本方式发送的，解析时开销较大且容易出错。</li>
+<li>HTTP&#x2F;2.0：采用二进制格式，将数据分割为小的帧，解析更高效、可靠</li>
+</ul>
+</li>
+<li><p><strong>多路复用</strong></p>
+<ul>
+<li>HTTP&#x2F;1.1：支持持久连接，但请求在同一连接上串行发送，容易出现队头阻塞<ul>
+<li>可以连续发送多个请求，但服务器必须按顺序返回响应</li>
+</ul>
+</li>
+<li>HTTP&#x2F;2.0：支持多路复用，允许在单个TCP连接上并行交错发送多个请求和响应<ul>
+<li>请求和响应报文被拆分为更小的帧<ul>
+<li>帧类型包括 DATA、HEADERS、PRIORITY 等，每种类型的帧都有特定的用途。</li>
+<li>流的状态管理涉及多种状态，如“已打开”、“已关闭”等，客户端和服务器可以通过发送特定的帧（如 RST_STREAM）来管理流的生命周期</li>
+</ul>
+</li>
+<li>帧被分配到不同的流（Stream），每个流都有唯一的标识符</li>
+<li>接收方根据帧头中的流标识符将属于同一流的帧重新组装为完整的请求或响应</li>
+</ul>
+</li>
+<li>HTTP&#x2F;2.0 基于 TCP 协议来传输数据，发生了丢包现象时，就会触发 TCP 的重传机制，<br>这样在一个 TCP 连接中的所有的 HTTP 请求都必须等待这个丢了的包被重传回来</li>
+</ul>
+</li>
+<li><p><strong>头部压缩</strong></p>
+<ul>
+<li>HTTP&#x2F;1.1：头部信息以纯文本发送，冗余较多</li>
+<li>HTTP&#x2F;2.0：引入 HPACK 算法对头部进行压缩，显著减少传输数据量<br><strong>HPACK 算法</strong>：<ul>
+<li><strong>静态表和动态表</strong>：<br>客户端和服务器各自维护一个<strong>静态表</strong>和<strong>动态表</strong>，用于存储常见的头部字段。<br>静态表包含预定义的常用头部，动态表则在通信过程中动态更新，记录已发送的头部字段。<br>通过引用这些表中的索引，可以避免重复传输相同的头部信息。</li>
+<li><strong>哈夫曼编码</strong>：<br>HPACK 使用哈夫曼编码对头部字段进行压缩，将常用字符编码为更短的二进制序列，从而减少头部的大小。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>服务器推送</strong></p>
+<p><code>HTTP/2.0</code> 允许服务器主动推送页面相关资源给客户端，而不需要客户端明确请求，<br>避免了客户端请求和服务器响应之间的延迟，可以减少页面加载时间</p>
+<ul>
+<li>例如，客户端请求一个 HTML 页面时，服务器可以主动推送相关的 CSS、JavaScript 文件等资源，从而加快页面渲染速度</li>
+</ul>
+</li>
+<li><p><strong>优先级和依赖</strong></p>
+<p><code>HTTP/2.0</code> 允许客户端为请求设置优先级，并表达请求之间的依赖关系，资源加载更加有序</p>
+</li>
+</ul>
+<h4 id="HTTP3-0有了解过吗？"><a href="#HTTP3-0有了解过吗？" class="headerlink" title="HTTP3.0有了解过吗？"></a>HTTP3.0有了解过吗？</h4><p>HTTP3.0基于 QUIC 协议，运行在UDP上，整合了TCP和TLS协议</p>
+<p>应用层数据直接被封装成QUIC帧，<br>整合一个或多个帧，加上信息（<strong>连接 ID</strong>&#x2F;<code>Connection ID</code>）后被封装成一个 QUIC 数据包<br>QUIC 数据包被封装在 UDP 数据报中，通过网络传输</p>
+<ul>
+<li><strong>无队头阻塞</strong><ul>
+<li>HTTP&#x2F;1.1没有解决响应的队头阻塞、HTTP&#x2F;2基于TCP 协议，<strong>一旦发生丢包，就会阻塞住所有的 HTTP 请求</strong></li>
+<li>HTTP3.0基于UDP 协议发送，<strong>当某个流发生丢包时，只会阻塞这个流，其他流不会受到影响，因此不存在队头阻塞问题</strong></li>
+</ul>
+</li>
+<li><strong>零 RTT 连接建立</strong><ul>
+<li>传输数据前的 QUIC 协议握手只需要 1 RTT，目的是为确认双方的「连接 ID」</li>
+<li>QUIC 内部包含了 TLS</li>
+<li>第二次连接时，应用数据包可以和 QUIC 握手信息（连接信息 + TLS 信息）一起发送，达到 0-RTT 的效果</li>
+</ul>
+</li>
+<li><strong>连接迁移</strong><ul>
+<li>网络环境发送改变（如Wifi—&gt;移动网络）时，通过确认<code>Connection ID</code>实现<strong>零 RTT 连接</strong></li>
+</ul>
+</li>
+<li><strong>向前纠错机制</strong><ul>
+<li>每个数据包还包括了部分其他数据包的数据，少量丢包无需重传</li>
+</ul>
+</li>
+<li><strong>安全性</strong><ul>
+<li>默认使用TLS加密</li>
+</ul>
+</li>
+</ul>
+<h3 id="Day05"><a href="#Day05" class="headerlink" title="Day05"></a>Day05</h3><h4 id="HTTPS和HTTP有哪些区别"><a href="#HTTPS和HTTP有哪些区别" class="headerlink" title="HTTPS和HTTP有哪些区别"></a>HTTPS和HTTP有哪些区别</h4><h4 id="HTTPS的工作原理-HTTPS建立连接的过程）"><a href="#HTTPS的工作原理-HTTPS建立连接的过程）" class="headerlink" title="HTTPS的工作原理(HTTPS建立连接的过程）"></a>HTTPS的工作原理(HTTPS建立连接的过程）</h4><h4 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h4>
       
     </div>
     <footer class="article-footer">
