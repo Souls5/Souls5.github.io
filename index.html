@@ -159,6 +159,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/03/04/2025-03-04-ELinux%E7%AD%96%E7%95%A5%E5%86%B2%E7%AA%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/new_avatar.png">
+      <meta itemprop="name" content="间">
+      <meta itemprop="description" content="面向就业学习，Java相关技术栈、面试八股文和算法题中...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不是不是">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/03/04/2025-03-04-ELinux%E7%AD%96%E7%95%A5%E5%86%B2%E7%AA%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">SELinux策略冲突分析工具的设计与实现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-03-04 15:30:00 / 修改时间：15:03:25" itemprop="dateCreated datePublished" datetime="2025-03-04T15:30:00+08:00">2025-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index"><span itemprop="name">毕设</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="开题报告"><a href="#开题报告" class="headerlink" title="开题报告"></a>开题报告</h4><h5 id="一、选题背景"><a href="#一、选题背景" class="headerlink" title="一、选题背景"></a>一、选题背景</h5><p><strong>研究现状</strong></p>
+<p>SELinux（Security-Enhanced Linux）是美国国家安全局（NSA）研发的一种强制访问控制机制，目前广泛应用于Linux系统安全领域。其通过安全策略对系统访问权限进行细粒度管控，能够有效遏制恶意操作。然而，随着应用场景复杂度增加，SELinux策略文件的规模呈现指数增长，由此带来的冗余与冲突问题逐步显现。这类问题可能导致系统安全漏洞、性能衰减甚至功能障碍。</p>
+<p>在国际研究中，学者们围绕SELinux的访问控制模型及策略优化展开了深入探讨。例如，Pahuja等（2023）提出了改进的逻辑推理冲突检测算法，大幅提高了检测效率。但多数研究侧重理论验证，实际工具开发较少涉及。在国内，研究集中于SELinux策略定制与优化，部分开源工具虽具备检测功能，但多局限于单一任务，难以应对复杂环境需求。</p>
+<p><strong>选题目的及意义</strong></p>
+<p>本课题旨在开发一款SELinux策略冲突分析工具，解决当前工具在冲突检测及优化建议方面的不足。通过自动检测与实时优化建议，该工具帮助管理员迅速发现并处理冲突，提升系统安全性与运维效率。本研究既能为SELinux的应用提供技术支持，也有助于推动该领域的理论研究发展。</p>
+<h5 id="二、研究目标和内容"><a href="#二、研究目标和内容" class="headerlink" title="二、研究目标和内容"></a>二、研究目标和内容</h5><p>2.1 研究目标<br>1.策略解析：构建功能模块，解析SELinux策略文件并转化为结构化数据。<br>2.冲突检测：设计高效算法，定位并识别规则冗余及权限冲突问题。<br>3.实时告警与优化：通过可视化和告警功能，辅助用户快速排查并解决问题。</p>
+<p>2.2 主要研究内容<br>1.理论分析：梳理SELinux策略语法和冲突类型，搭建冲突检测的理论框架。<br>2.算法设计：基于图算法或逻辑推理方法，开发适配Java语言的检测算法。<br>3.工具开发：基于Java语言实现具备解析、检测及告警功能的工具。<br>系统验证：在多种Linux系统环境中对工具进行功能和性能测试，并优化算法以提高准确性。</p>
+<h5 id="三、研究方案"><a href="#三、研究方案" class="headerlink" title="三、研究方案"></a>三、研究方案</h5><p><strong>3.1 研究方法</strong><br>1.理论分析<br>   系统分析 SELinux 策略文件结构，提取其语法规则和常见冲突类型。<br>   总结现有文献中的冲突检测方法，为工具开发提供理论依据。<br>2.算法设计<br>   使用基于图模型的算法表示策略规则之间的依赖关系，定位可能的冲突点。<br>   引入逻辑推理模块，通过对权限的推导分析潜在冲突。<br>3.工具开发<br>   语言选择：采用 Java 语言开发核心功能模块，确保工具的跨平台兼容性。<br>   模块设计：<br>     策略解析模块：利用 ANTLR 等工具解析 SELinux 策略文件。<br>     冲突检测模块：实现基于图算法的冲突分析逻辑。<br>     用户界面模块：通过 JavaFX 提供交互式可视化界面。<br>     告警与日志模块：通过日志记录和实时通知功能，协助用户快速处理问题。<br>4.测试验证<br>   在多种 Linux 发行版（如 CentOS、Ubuntu）中进行功能测试，评估工具的兼容性与性能表现。<br>   通过真实策略文件验证检测算法的准确率，优化算法以降低误报与漏报率。</p>
+<p><strong>3.2 实施步骤</strong></p>
+<p>2025年1月：调研SELinux策略特性，明确工具设计需求。<br>2025年2月：完成冲突检测算法的设计与初步实现。<br>2025年3月：开发策略解析、检测和用户界面模块。<br>2025年4月：部署工具并进行功能与性能优化，撰写相关文档与论文。</p>
+<p><strong>3.3 拟解决的主要问题及措施</strong><br>问题1：策略解析复杂度高，可能影响性能。<br>措施：优化解析算法，并结合多线程技术提高效率。</p>
+<p>问题2：检测算法误报率较高。<br>措施：通过逻辑推理及依赖分析，减少误报并提升检测准确性。</p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/02/20/2025-02-20-%E4%BB%BF%E7%89%9B%E5%AE%A2%E8%AE%BA%E5%9D%9B%E9%A1%B9%E7%9B%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1481,6 +1560,81 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/new_avatar.png">
+      <meta itemprop="name" content="间">
+      <meta itemprop="description" content="面向就业学习，Java相关技术栈、面试八股文和算法题中...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不是不是">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="post-title-link" itemprop="url">数据结构-数组相关算法题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-02-17 12:00:00" itemprop="dateCreated datePublished" datetime="2025-02-17T12:00:00+08:00">2025-02-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-03-04 14:07:57" itemprop="dateModified" datetime="2025-03-04T14:07:57+08:00">2025-03-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>归档用，每日刷题算法单独</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://programmercarl.com/">https://programmercarl.com</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/02/17/2025-02-17-Redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1606,81 +1760,6 @@
 
 
 <h3 id="三种特殊数据类型"><a href="#三种特殊数据类型" class="headerlink" title="三种特殊数据类型"></a>三种特殊数据类型</h3><h4 id="GEO地理位置"><a href="#GEO地理位置" class="headerlink" title="GEO地理位置"></a>GEO地理位置</h4><h4 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h4><h4 id="BitMap"><a href="#BitMap" class="headerlink" title="BitMap"></a>BitMap</h4><h3 id="配置文件-Redis-conf"><a href="#配置文件-Redis-conf" class="headerlink" title="配置文件 Redis.conf"></a>配置文件 Redis.conf</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/new_avatar.png">
-      <meta itemprop="name" content="间">
-      <meta itemprop="description" content="面向就业学习，Java相关技术栈、面试八股文和算法题中...">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不是不是">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="post-title-link" itemprop="url">数据结构-数组相关算法题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-02-17 12:00:00" itemprop="dateCreated datePublished" datetime="2025-02-17T12:00:00+08:00">2025-02-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-04 14:07:57" itemprop="dateModified" datetime="2025-03-04T14:07:57+08:00">2025-03-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>归档用，每日刷题算法单独</p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://programmercarl.com/">https://programmercarl.com</a></p>
-
       
     </div>
 
@@ -1894,20 +1973,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
