@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/web-app-manifest-192x192.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-96x96.png">
+  <link rel="mask-icon" href="/images/favicon/favicon.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"souls5.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="今日任务part01：数组理论基础，704. 二分查找，27. 移除元素，part02：209.长度最小的子数组， 59.螺旋矩阵II，补充可选（可复习时做）：58.区间和，开发商购买土地 第一章  数组part01数组理论基础**数组是存放在连续内存空间上的相同类型数据的集合。**通过下标索引的方式获取到下标对应的数据。    数组下标都是从0开始的。 数组内存空间的地址是连续的  正是因为数组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025-03-07-第一章-数组part01-数组part02">
+<meta property="og:url" content="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/index.html">
+<meta property="og:site_name" content="不是不是">
+<meta property="og:description" content="今日任务part01：数组理论基础，704. 二分查找，27. 移除元素，part02：209.长度最小的子数组， 59.螺旋矩阵II，补充可选（可复习时做）：58.区间和，开发商购买土地 第一章  数组part01数组理论基础**数组是存放在连续内存空间上的相同类型数据的集合。**通过下标索引的方式获取到下标对应的数据。    数组下标都是从0开始的。 数组内存空间的地址是连续的  正是因为数组">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/%E7%AE%97%E6%B3%95%E9%80%9A%E5%85%B3%E6%95%B0%E7%BB%84.png">
+<meta property="og:image" content="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/%E7%AE%97%E6%B3%95%E9%80%9A%E5%85%B3%E6%95%B0%E7%BB%841.png">
+<meta property="article:published_time" content="2025-03-07T03:55:15.000Z">
+<meta property="article:modified_time" content="2025-03-07T06:35:18.205Z">
+<meta property="article:author" content="间">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="数组">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/%E7%AE%97%E6%B3%95%E9%80%9A%E5%85%B3%E6%95%B0%E7%BB%84.png">
+
+<link rel="canonical" href="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>2025-03-07-第一章-数组part01-数组part02 | 不是不是</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">不是不是</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录学习、挣扎和一些无关紧要的琐事...大概</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/new_avatar.png">
+      <meta itemprop="name" content="间">
+      <meta itemprop="description" content="面向就业学习，Java相关技术栈、面试八股文和算法题中...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不是不是">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2025-03-07-第一章-数组part01-数组part02
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-03-07 11:55:15 / 修改时间：14:35:18" itemprop="dateCreated datePublished" datetime="2025-03-07T11:55:15+08:00">2025-03-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="今日任务"><a href="#今日任务" class="headerlink" title="今日任务"></a><strong>今日任务</strong></h3><p>part01：数组理论基础，704. 二分查找，27. 移除元素，<br>part02：209.长度最小的子数组， 59.螺旋矩阵II，<br>补充可选（可复习时做）：58.区间和，开发商购买土地</p>
+<h3 id="第一章-数组part01"><a href="#第一章-数组part01" class="headerlink" title="第一章  数组part01"></a><strong>第一章  数组part01</strong></h3><h5 id="数组理论基础"><a href="#数组理论基础" class="headerlink" title="数组理论基础"></a><strong>数组理论基础</strong></h5><p>**数组是存放在连续内存空间上的相同类型数据的集合。**通过下标索引的方式获取到下标对应的数据。</p>
+<img src="/2025/03/07/2025-03-07-第一章-数组part01-数组part02/算法通关数组.png"  alt="算法通关数组" style="zoom: 50%;" />
+
+<ul>
+<li><strong>数组下标都是从0开始的。</strong></li>
+<li><strong>数组内存空间的地址是连续的</strong></li>
+</ul>
+<p>正是因为数组在内存空间的地址是连续的，所以删除或者增添元素的时候，就难免要移动其他元素的地址。<br><img src="/2025/03/07/2025-03-07-第一章-数组part01-数组part02/算法通关数组1.png"  alt="算法通关数组1" style="zoom: 50%;" /></p>
+<p><strong>数组的元素是不能删的，只能覆盖。</strong></p>
+<p><strong>二维数组在内存的空间地址是连续的么？</strong></p>
+<p>C++中 二维数组在地址空间上是连续的</p>
+<p>Java 没有指针，同时也不对程序员暴露其元素的地址，寻址操作完全交给虚拟机</p>
+<ul>
+<li>Java中二维数组相当于多个一维数组，每个数组起始地址地址不同</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test_arr</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span>[][] arr = &#123;&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;, &#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;, &#123;<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>&#125;, &#123;<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>&#125;&#125;;</span><br><span class="line">    System.out.println(arr[<span class="number">0</span>]);</span><br><span class="line">    System.out.println(arr[<span class="number">1</span>]);</span><br><span class="line">    System.out.println(arr[<span class="number">2</span>]);</span><br><span class="line">    System.out.println(arr[<span class="number">3</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[I@7852e922</span><br><span class="line">[I@4e25154f</span><br><span class="line">[I@70dea4e</span><br><span class="line">[I@5c647e05</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在 Java 中，<code>System.out.println(arr[i]) </code>默认调用的是 toString() 方法，<br>而 toString() 方法的默认实现是：<br><code>getClass().getName() + &quot;@&quot; + Integer.toHexString(hashCode());</code></p>
+<ul>
+<li><p><code>getClass().getName()</code>：返回类型名（[I 表示 int[] 数组）<br><code>Integer.toHexString(hashCode())</code>：返回数组对象的哈希值（与内存地址相关）</p>
+</li>
+<li><p>这意味着，arr[0]、arr[1] 等打印出来的并不是数组内容，<br>而是它们在 JVM 内存中的标识符。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>为什么 arr[0]、arr[1] 的地址不同？</strong></p>
+<ul>
+<li>Java 没有真正的二维数组，它的二维数组实际上是**”数组的数组”**。</li>
+<li>arr[0]、arr[1]、arr[2]、arr[3] 分别是 4 个不同的一维数组对象，存储在不同的内存位置。</li>
+<li>arr 本质上是一个 int[][] 类型的 引用数组，它存储的是 4 个 int[] 数组的引用，而这些 int[] 可能分散在堆内存的不同位置，因此它们的地址不连续。</li>
+</ul>
+</li>
+</ul>
+<p>文章链接：<a target="_blank" rel="noopener" href="https://programmercarl.com/%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html">https://programmercarl.com/%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</a></p>
+<h5 id="704-二分查找"><a href="#704-二分查找" class="headerlink" title="704. 二分查找"></a><strong>704. 二分查找</strong></h5><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/">https://leetcode.cn/problems/binary-search/</a></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</span><br><span class="line"></span><br><span class="line">示例 1:</span><br><span class="line">​<span class="code">```text</span></span><br><span class="line"><span class="code">输入: nums = [-1,0,3,5,9,12], target = 9     </span></span><br><span class="line"><span class="code">输出: 4       </span></span><br><span class="line"><span class="code">解释: 9 出现在 nums 中并且下标为 4     </span></span><br><span class="line"><span class="code">​```</span></span><br><span class="line">示例 2:</span><br><span class="line">​<span class="code">```text</span></span><br><span class="line"><span class="code">输入: nums = [-1,0,3,5,9,12], target = 2     </span></span><br><span class="line"><span class="code">输出: -1        </span></span><br><span class="line"><span class="code">解释: 2 不存在 nums 中因此返回 -1        </span></span><br><span class="line"><span class="code">​```</span></span><br><span class="line">提示：</span><br><span class="line"><span class="bullet">-</span> 你可以假设 nums 中的所有元素是不重复的。</span><br><span class="line"><span class="bullet">-</span> n 将在 [1, 10000]之间。</span><br><span class="line"><span class="bullet">-</span> nums 的每个元素都将在 [-9999, 9999]之间。</span><br></pre></td></tr></table></figure>
+
+<p><strong>左闭右闭	[left,right]</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> (left + right) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>左闭右开	[left,right)</strong></p>
+<p>跟左闭右闭相比，</p>
+<ul>
+<li><code>right</code>初值为<code>nums.length</code>、</li>
+<li><strong>循环条件</strong>改为<code>while (left &lt; right)</code>、</li>
+<li><strong>边界更新</strong>时若 <code>nums[mid] &gt; target</code>，则 <code>right = mid</code>，<ul>
+<li>因为 <code>mid</code> 已经检查过，且不等于目标值，且 <code>right</code> 为开区间。</li>
+</ul>
+</li>
+</ul>
+<p>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html">https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fA4y1o715">https://www.bilibili.com/video/BV1fA4y1o715</a></p>
+<h5 id="27-移除元素"><a href="#27-移除元素" class="headerlink" title="27. 移除元素"></a><strong>27. 移除元素</strong></h5><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">https://leetcode.cn/problems/remove-element/</a> </p>
+<p><strong>暴力解法</strong></p>
+<p><strong>⭐双指针法</strong></p>
+<p>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html">https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12A4y1Z7LP">https://www.bilibili.com/video/BV12A4y1Z7LP</a> </p>
+<h5 id="977-有序数组的平方"><a href="#977-有序数组的平方" class="headerlink" title="977.有序数组的平方"></a><strong>977.有序数组的平方</strong></h5><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/">https://leetcode.cn/problems/squares-of-a-sorted-array/</a></p>
+<p><strong>题目建议</strong>： 本题关键在于理解双指针思想 </p>
+<p>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0977.%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9.html">https://programmercarl.com/0977.%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9.html</a></p>
+<p>视频讲解： <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1QB4y1D7ep">https://www.bilibili.com/video/BV1QB4y1D7ep</a> </p>
+<h3 id="第一章-数组part02"><a href="#第一章-数组part02" class="headerlink" title="第一章  数组part02"></a>第一章  数组part02</h3><h5 id="209-长度最小的子数组"><a href="#209-长度最小的子数组" class="headerlink" title="209.长度最小的子数组"></a><strong>209.长度最小的子数组</strong></h5><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/">https://leetcode.cn/problems/minimum-size-subarray-sum/</a></p>
+<p><strong>题目建议</strong>： 本题关键在于理解滑动窗口，这个滑动窗口看文字讲解 还挺难理解的，建议大家先看视频讲解。  拓展题目可以先不做。 </p>
+<p>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84.html">https://programmercarl.com/0209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84.html</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1tZ4y1q7XE">https://www.bilibili.com/video/BV1tZ4y1q7XE</a></p>
+<h5 id="59-螺旋矩阵II"><a href="#59-螺旋矩阵II" class="headerlink" title="59.螺旋矩阵II"></a><strong>59.螺旋矩阵II</strong></h5><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix-ii/">https://leetcode.cn/problems/spiral-matrix-ii/</a></p>
+<p><strong>题目建议</strong>：  本题关键还是在转圈的逻辑，在二分搜索中提到的区间定义，在这里又用上了。 </p>
+<p>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II.html">https://programmercarl.com/0059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II.html</a></p>
+<p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1SL4y1N7mV/">https://www.bilibili.com/video/BV1SL4y1N7mV/</a></p>
+<h5 id="58-区间和"><a href="#58-区间和" class="headerlink" title="58.区间和"></a><strong>58.区间和</strong></h5><p><strong>前缀和是一种思维巧妙很实用 而且 很有容易理解的一种算法思想，大家可以体会一下</strong></p>
+<p><strong>文章讲解：</strong><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0058.%E5%8C%BA%E9%97%B4%E5%92%8C.html"><strong>https://www.programmercarl.com/kamacoder/0058.%E5%8C%BA%E9%97%B4%E5%92%8C.html</strong></a></p>
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5><h5 id="44-开发商购买土地"><a href="#44-开发商购买土地" class="headerlink" title="44.开发商购买土地"></a>44.<strong>开发商购买土地</strong></h5><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0044.%E5%BC%80%E5%8F%91%E5%95%86%E8%B4%AD%E4%B9%B0%E5%9C%9F%E5%9C%B0.html">https://www.programmercarl.com/kamacoder/0044.%E5%BC%80%E5%8F%91%E5%95%86%E8%B4%AD%E4%B9%B0%E5%9C%9F%E5%9C%B0.html</a></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>文章链接：<a target="_blank" rel="noopener" href="https://programmercarl.com/%E6%95%B0%E7%BB%84%E6%80%BB%E7%BB%93%E7%AF%87.html">https://programmercarl.com/%E6%95%B0%E7%BB%84%E6%80%BB%E7%BB%93%E7%AF%87.html</a> </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/03/04/2025-03-04-ELinux%E7%AD%96%E7%95%A5%E5%86%B2%E7%AA%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" rel="prev" title="SELinux策略冲突分析工具的设计与实现">
+      <i class="fa fa-chevron-left"></i> SELinux策略冲突分析工具的设计与实现
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">今日任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01"><span class="nav-number">2.</span> <span class="nav-text">第一章  数组part01</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="nav-number">2.0.1.</span> <span class="nav-text">数组理论基础</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">2.0.2.</span> <span class="nav-text">704. 二分查找</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#27-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">2.0.3.</span> <span class="nav-text">27. 移除元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#977-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9"><span class="nav-number">2.0.4.</span> <span class="nav-text">977.有序数组的平方</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part02"><span class="nav-number">3.</span> <span class="nav-text">第一章  数组part02</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84"><span class="nav-number">3.0.1.</span> <span class="nav-text">209.长度最小的子数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#59-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II"><span class="nav-number">3.0.2.</span> <span class="nav-text">59.螺旋矩阵II</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#58-%E5%8C%BA%E9%97%B4%E5%92%8C"><span class="nav-number">3.0.3.</span> <span class="nav-text">58.区间和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">3.0.4.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#44-%E5%BC%80%E5%8F%91%E5%95%86%E8%B4%AD%E4%B9%B0%E5%9C%9F%E5%9C%B0"><span class="nav-number">3.0.5.</span> <span class="nav-text">44.开发商购买土地</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="间"
+      src="/images/new_avatar.png">
+  <p class="site-author-name" itemprop="name">间</p>
+  <div class="site-description" itemprop="description">面向就业学习，Java相关技术栈、面试八股文和算法题中...</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">间</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/',]
+      });
+      });
+  </script>
+
+</body>
+</html>
