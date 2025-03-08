@@ -602,7 +602,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-07 10:52:19" itemprop="dateModified" datetime="2025-03-07T10:52:19+08:00">2025-03-07</time>
+                <time title="修改时间：2025-03-08 09:35:49" itemprop="dateModified" datetime="2025-03-08T09:35:49+08:00">2025-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -2355,6 +2355,114 @@
 <li><strong>使用 LIKE 语句</strong><br> 当 LIKE 查询以通配符 % 开头（例如 LIKE ‘%abc’）时，由于无法确定匹配起始位置，索引也难以发挥作用。</li>
 <li><strong>在列上使用函数或表达式</strong><br> 在查询条件中对索引列使用函数（如 UPPER()、SUBSTR() 等）或其他表达式，都会破坏索引的原有顺序，从而使索引失效。</li>
 <li><strong>表连接中的列类型不匹配</strong><br> 如果在表连接时涉及的列数据类型不一致（例如一个表的列是整数，另一个表的列是字符串），MySQL 可能需要进行隐式类型转换，导致无法利用原有索引。</li>
+</ul>
+<h3 id="Day18"><a href="#Day18" class="headerlink" title="Day18"></a>Day18</h3><h4 id="什么是慢查询？原因是什么？可以怎么优化？"><a href="#什么是慢查询？原因是什么？可以怎么优化？" class="headerlink" title="什么是慢查询？原因是什么？可以怎么优化？"></a>什么是慢查询？原因是什么？可以怎么优化？</h4><ul>
+<li><p>**什么是慢查询？**数据库查询的执行时间超过预设的超时时间时，就被称为慢查询。这通常意味着 SQL 执行耗时较长，会影响系统性能和响应速度。</p>
+</li>
+<li><p><strong>慢查询产生的原因</strong></p>
+<ul>
+<li><strong>查询语句复杂</strong>：涉及多个表的连接和子查询，使执行过程更复杂。</li>
+<li><strong>查询数据量大</strong>：数据量庞大时，即使查询本身逻辑简单，遍历数据也会耗时较长。</li>
+<li><strong>缺少合适的索引</strong>：无法利用索引导致全表扫描，查询效率大幅下降。</li>
+<li><strong>数据库设计不合理</strong>：表结构设计臃肿或冗余，查询时需要处理更多无关数据。</li>
+<li><strong>并发冲突</strong>：多个查询同时访问同一资源时可能产生锁等待或资源争用，从而延长响应时间。</li>
+<li><strong>硬件资源不足</strong>：服务器负载过高、CPU、内存或磁盘 IO 性能不够，都会使查询变慢。</li>
+</ul>
+</li>
+<li><p><strong>优化慢查询的方法</strong></p>
+<ul>
+<li><strong>定位慢查询</strong>：运行 SQL，使用慢查询日志（例如 MySQL 的 <code>slow_query_log</code>）找到耗时较长的 SQL。</li>
+<li><strong>利用 EXPLAIN 分析执行计划</strong>：查看 SQL 是如何利用索引进行查询的，确定是否存在全表扫描或不合理的连接方式。</li>
+<li><strong>选择区分度最高的字段建索引</strong>：针对查询条件中最具选择性的字段建立索引，可大幅减少扫描行数。</li>
+<li><strong>调整查询方式</strong>：<ul>
+<li>尽量避免 <code>SELECT *</code>，只查询需要的字段；</li>
+<li>对于 <code>ORDER BY LIMIT</code> 的查询，尽量让排序的数据量尽早减小；</li>
+<li>重写过于复杂的查询，简化子查询和多表连接。</li>
+</ul>
+</li>
+<li><strong>遵循索引建立原则</strong><ul>
+<li>注意联合索引的最左前缀匹配；</li>
+<li>避免对索引列进行函数或类型转换，确保索引能生效。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="undo-log、redo-log、binlog-有什么用？"><a href="#undo-log、redo-log、binlog-有什么用？" class="headerlink" title="undo log、redo log、binlog 有什么用？"></a>undo log、redo log、binlog 有什么用？</h4><table>
+<thead>
+<tr>
+<th>日志类型</th>
+<th>作用</th>
+<th>记录内容</th>
+<th>存储位置</th>
+<th>主要应用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Undo Log</strong></td>
+<td>事务回滚 &amp; MVCC</td>
+<td><strong>修改前的数据</strong>（逻辑日志）</td>
+<td>InnoDB 存储引擎层</td>
+<td>事务回滚、MVCC</td>
+</tr>
+<tr>
+<td><strong>Redo Log</strong></td>
+<td>事务持久化 &amp; 崩溃恢复</td>
+<td><strong>数据页的变更</strong>（物理日志）</td>
+<td>InnoDB 存储引擎层</td>
+<td>事务提交、崩溃恢复</td>
+</tr>
+<tr>
+<td><strong>Binlog</strong></td>
+<td>数据备份 &amp; 主从复制</td>
+<td><strong>SQL 语句</strong>（逻辑日志）</td>
+<td>MySQL Server 层</td>
+<td>备份恢复、主从复制</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><strong>Undo Log（回滚日志）—— 事务回滚 &amp; MVCC</strong></p>
+<ul>
+<li><strong>作用</strong>：保证事务的<strong>原子性（A）和一致性（C）</strong>，用于<strong>事务回滚</strong>和<strong>MVCC（多版本并发控制）</strong>。</li>
+<li><strong>记录内容</strong>：数据被修改前的值（逻辑日志）。</li>
+<li><strong>存储位置</strong>：InnoDB 存储引擎层。</li>
+<li><strong>应用场景</strong>：<ul>
+<li><strong>事务回滚</strong>：如果事务失败或需要撤销，Undo Log 可恢复原始数据。</li>
+<li><strong>MVCC</strong>：在可重复读（Repeatable Read）等隔离级别下，提供数据的历史版本，支持一致性读。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Redo Log（重做日志）—— 事务持久化 &amp; 崩溃恢复</strong></p>
+<ul>
+<li><strong>作用</strong>：保证事务的<strong>持久性（D）</strong>，防止数据库崩溃导致已提交事务丢失。</li>
+<li><strong>记录内容</strong>：物理日志，记录数据页的变更（写入了什么修改）。</li>
+<li><strong>存储位置</strong>：InnoDB 存储引擎层（<code>ib_logfile</code>）。</li>
+<li><strong>应用场景</strong>：<ul>
+<li><strong>崩溃恢复</strong>：数据库重启时，通过 Redo Log 重新应用未落盘的数据，确保已提交事务不丢失。</li>
+<li><strong>WAL 机制（Write-Ahead Logging）</strong>：事务提交时，先写 Redo Log，再更新数据，提高写入性能。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Binlog（归档日志）—— 数据备份 &amp; 主从复制</strong></p>
+<ul>
+<li><strong>作用</strong>：用于<strong>数据恢复</strong>和<strong>主从复制</strong>，在 MySQL Server 层记录 SQL 操作。</li>
+<li><strong>记录内容</strong>：逻辑日志，记录所有 DML 语句（INSERT、UPDATE、DELETE）。</li>
+<li><strong>存储位置</strong>：Server 层（<code>mysql-bin</code> 文件）。</li>
+<li><strong>应用场景</strong>：<ul>
+<li><strong>主从复制</strong>：主库将 Binlog 发送给从库，从库回放日志，实现数据同步。</li>
+<li><strong>数据恢复</strong>：误删数据时，可通过 Binlog 进行基于时间点的恢复。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>一句话概括</strong></p>
+<ul>
+<li><strong>Undo Log</strong> 让事务可回滚，支持 MVCC。</li>
+<li><strong>Redo Log</strong> 让事务提交后数据不丢失，即使数据库崩溃也能恢复。</li>
+<li><strong>Binlog</strong> 让数据可复制、可备份，实现增量恢复和主从同步。</li>
 </ul>
 
       
