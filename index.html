@@ -159,6 +159,345 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/03/10/2025-03-10-%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E9%93%BE%E8%A1%A8part01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/new_avatar.png">
+      <meta itemprop="name" content="间">
+      <meta itemprop="description" content="面向就业学习，Java相关技术栈、面试八股文和算法题中...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不是不是">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/03/10/2025-03-10-%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E9%93%BE%E8%A1%A8part01/" class="post-title-link" itemprop="url">2025-03-11-第二章-链表part01—链表part02</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-03-10 16:59:00" itemprop="dateCreated datePublished" datetime="2025-03-10T16:59:00+08:00">2025-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-03-12 17:13:11" itemprop="dateModified" datetime="2025-03-12T17:13:11+08:00">2025-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://programmercarl.com/%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html"> 代码随想链表理论基础</a></p>
+<h3 id="今日任务"><a href="#今日任务" class="headerlink" title="今日任务"></a><strong>今日任务</strong></h3><p>part01：链表理论基础 、203.移除链表元素 、707.设计链表 、206.反转链表 </p>
+<p>part02：24. 两两交换链表中的节点 、19.删除链表的倒数第N个节点 、<br>               面试题 02.07. 链表相交、142.环形链表II 、总结</p>
+<h3 id="第二章-链表part01"><a href="#第二章-链表part01" class="headerlink" title="第二章 链表part01"></a>第二章 链表part01</h3><h5 id="链表理论基础"><a href="#链表理论基础" class="headerlink" title="链表理论基础"></a>链表理论基础</h5><p>链表是一种通过指针串联在一起的线性结构，<br>每一个节点由两部分组成，一个是数据域一个是指针域（存放指向下一个节点的指针），最后一个节点的指针域指向null（空指针的意思）。</p>
+<p>链表的入口节点称为链表的头结点也就是head。<br>如图所示：<br><img src="/2025/03/10/2025-03-10-第二章-链表part01/20200806194529815.png"  alt="链表1" style="zoom: 50%;" /></p>
+<p><strong>链表的类型</strong></p>
+<ul>
+<li><p><strong>单链表</strong>：如上所述</p>
+</li>
+<li><p><strong>双链表</strong>：<br>单链表中的指针域只能指向节点的下一个节点。<br>而双链表每一个节点有两个指针域，一个指向下一个节点，一个指向上一个节点。<br>所以双链表 既可以向前查询也可以向后查询。</p>
+<img src="/2025/03/10/2025-03-10-第二章-链表part01/20200806194559317.png"  alt="链表2" style="zoom:50%;" />
+</li>
+<li><p><strong>循环链表</strong>：链表首尾相连，可以用来解决约瑟夫环问题</p>
+<img src="/2025/03/10/2025-03-10-第二章-链表part01/20200806194629603.png"  alt="链表4" style="zoom:50%;" /></li>
+</ul>
+<p><strong>链表的存储方式</strong></p>
+<p>链表是通过指针域的指针链接在内存中各个节点。</p>
+<p>所以链表中的节点在内存中不是连续分布的 ，而是散乱分布在内存中的某地址上，分配机制取决于操作系统的内存管理。<br><img src="/2025/03/10/2025-03-10-第二章-链表part01/20200806194613920.png"  alt="链表3" style="zoom:67%;" /></p>
+<p><strong>链表的定义</strong> (使用 <strong>自定义类 <code>ListNode</code></strong> 来定义链表节点)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ListNode</span> &#123;</span><br><span class="line">    <span class="type">int</span> val;      <span class="comment">// 存储节点的值</span></span><br><span class="line">    ListNode next; <span class="comment">// 指向下一个节点的引用</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 无参构造函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ListNode</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">    <span class="comment">// 只有值的构造函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ListNode</span><span class="params">(<span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.val = val;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 有值和下一个节点指针的构造函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ListNode</span><span class="params">(<span class="type">int</span> val, ListNode next)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.val = val;</span><br><span class="line">        <span class="built_in">this</span>.next = next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>Java 的构造函数</strong>： Java 类中的一种特殊方法，当创建对象时自动调用</p>
+<ul>
+<li><strong>初始化对象</strong>，为对象的字段（变量）赋初值。</li>
+<li><strong>与类同名</strong>，且 <strong>没有返回值</strong>（包括 <code>void</code> 也不能写）</li>
+<li><strong>可以重载</strong>（即<strong>多个构造方法</strong>），以支持不同的初始化方式</li>
+</ul>
+</li>
+<li><p><code>ListNode</code> 类中的构造函数解析</p>
+</li>
+<li><p><strong>无参构造函数</strong>：</p>
+<ul>
+<li><p><strong>不设置任何初始值</strong>，即 <code>val</code> 默认为 <code>0</code>，<code>next</code> 默认为 <code>null</code>。</p>
+<ul>
+<li>适用于 <strong>先创建空节点，再赋值</strong> 的情况。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ListNode</span> <span class="variable">node</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(); <span class="comment">// val = 0, next = null</span></span><br><span class="line">node.val = <span class="number">10</span>;</span><br><span class="line">node.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>只有值的构造函数</strong>：</p>
+<ul>
+<li>创建 <strong>仅存储数据、不指向其他节点</strong> 的单个节点，适用于 <strong>逐步构造链表</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ListNode</span> <span class="variable">node</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">5</span>); <span class="comment">// 创建一个值为 5 的节点</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>有值和下一个节点指针的构造函数</strong>：</p>
+<ul>
+<li><strong>同时初始化节点的值和指向的下一个节点</strong>，适用于 <strong>创建多个节点连接的链表</strong>。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ListNode</span> <span class="variable">node1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">1</span>);</span><br><span class="line"><span class="type">ListNode</span> <span class="variable">node2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">2</span>, node1); <span class="comment">// node2 -&gt; node1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ListNode</span> <span class="variable">head</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">1</span>, <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">2</span>, <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">3</span>)));</span><br><span class="line"><span class="comment">// 生成链表： 1 -&gt; 2 -&gt; 3</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这样可以<strong>一行代码创建链表</strong>，简化构造流程。</li>
+</ul>
+</li>
+<li><p>为什么需要三种构造函数</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>构造函数</th>
+<th>适用场景</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>无参构造</td>
+<td>先创建节点再赋值</td>
+<td>适用于动态添加节点</td>
+</tr>
+<tr>
+<td>只有值的构造</td>
+<td>只存储值，不指定后续节点</td>
+<td>适用于<strong>构建独立节点</strong></td>
+</tr>
+<tr>
+<td>值 + 指针构造</td>
+<td>直接构建完整链表结构</td>
+<td><strong>简化链表创建</strong>，减少手动赋值</td>
+</tr>
+</tbody></table>
+<ul>
+<li>三种构造函数的使用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 无参构造（手动赋值）</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">node1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>();</span><br><span class="line">        node1.val = <span class="number">10</span>;</span><br><span class="line">        node1.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 只有值的构造</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">node2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">30</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 3. 值 + 指针构造</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">node3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">40</span>, node2); <span class="comment">// node3 -&gt; node2</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4. 一行构造完整链表</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">head</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">1</span>, <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">2</span>, <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">3</span>)));</span><br><span class="line"></span><br><span class="line">        printList(head);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印链表</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printList</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (head != <span class="literal">null</span>) &#123;</span><br><span class="line">            System.out.print(head.val + <span class="string">&quot; -&gt; &quot;</span>);</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;null&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>链表的操作</strong></p>
+<ul>
+<li><p><strong>删除节点</strong></p>
+<p>删除D节点，如图所示：</p>
+<img src="/2025/03/10/2025-03-10-第二章-链表part01/20200806195114541-20230310121459257.png"  alt="链表-删除节点" style="zoom:33%;" />
+只要将C节点的next指针 指向E节点就可以了。
+
+<p>此时D节点依然存留在内存里，只不过是没有在这个链表里而已。所以在C++里最好是再手动释放这个D节点，释放这块内存。</p>
+<p>其他语言例如Java、Python，就有自己的内存回收机制，就不用自己手动释放了。</p>
+</li>
+<li><p><strong>添加节点</strong></p>
+<img src="/2025/03/10/2025-03-10-第二章-链表part01/20200806195134331-20230310121503147.png"  alt="链表-添加节点" style="zoom: 33%;" />
+可以看出链表的增添和删除都是O(1)操作，也不会影响到其他节点。
+
+<p>但是要注意，要是删除第五个节点，需要从头节点查找到第四个节点通过next指针进行删除操作，查找的时间复杂度是O(n)。</p>
+</li>
+</ul>
+<p><strong>性能分析</strong></p>
+<p>再把链表的特性和数组的特性进行一个对比，如图所示：<br><img src="/2025/03/10/2025-03-10-第二章-链表part01/20200806195200276.png"  alt="链表-链表与数据性能对比" style="zoom: 50%;" /></p>
+<p>数组在定义的时候，长度就是固定的，如果想改动数组的长度，就需要重新定义一个新的数组。</p>
+<p>链表的长度可以是不固定的，并且可以动态增删， 适合数据量不固定，频繁增删，较少查询的场景。</p>
+<h5 id="203-移除链表元素"><a href="#203-移除链表元素" class="headerlink" title="203.移除链表元素"></a>203.移除链表元素</h5><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-linked-list-elements/description/">https://leetcode.cn/problems/remove-linked-list-elements/description/</a></p>
+<p>给你一个链表的头节点 <code>head</code> 和一个整数 <code>val</code> ，<br>请你删除链表中所有满足 <code>Node.val == val</code> 的节点，并返回 <strong>新的头节点</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<img src="/2025/03/10/2025-03-10-第二章-链表part01/removelinked-list.jpg"  alt="img" style="zoom:50%;" />
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,6,3,4,5,6], val = 6</span><br><span class="line">输出：[1,2,3,4,5]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [], val = 1</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [7,7,7,7], val = 7</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>列表中的节点数目在范围 [0, 10<sup>4</sup>] 内</li>
+<li><code>1 &lt;= Node.val &lt;= 50</code></li>
+<li><code>0 &lt;= val &lt;= 50</code></li>
+</ul>
+<p><strong>原链表删除元素</strong></p>
+<ul>
+<li>判断是否移除头结点（可能需要连续移除，使用while循环作判断）<ul>
+<li>删除元素为头结点则将头结点后移，</li>
+</ul>
+</li>
+<li>定义临时指针curr，从head开始 ——&gt; 避免单向链表找不到上一个节点的问题<ul>
+<li>使用临时指针 <code>curr</code> 来遍历和操作链表</li>
+</ul>
+</li>
+<li>循环条件包含 <code>head != null</code> &#x2F; <code>curr!= null</code> ——&gt;避免操作空指针</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">removeElements1</span><span class="params">(ListNode head, <span class="type">int</span> val)</span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (head != <span class="literal">null</span> &amp;&amp; head.val == val)&#123;</span><br><span class="line">        head = head.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//定义临时指针curr，从head开始 ——&gt; 避免单向链表找不到上一个节点的问题</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">curr</span> <span class="operator">=</span> head; </span><br><span class="line">    <span class="keyword">while</span>(curr!= <span class="literal">null</span> &amp;&amp; curr.next != <span class="literal">null</span> )&#123;</span><br><span class="line">        <span class="keyword">if</span>(curr.next.val == val)&#123;</span><br><span class="line">            curr.next = curr.next.next; <span class="comment">// 删除元素，将指针指向下一个元素</span></span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            curr = curr.next; <span class="comment">//无需删除元素，遍历下一个元素</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head; <span class="comment">//返回链表头节点，通过打印链表方法可输出整个链表</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>使用虚拟头结点</strong></p>
+<ul>
+<li>引入虚拟头节点来简化对头节点的删除操作</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">removeElements2</span><span class="params">(ListNode head, <span class="type">int</span> val)</span>&#123;</span><br><span class="line">    <span class="comment">//创建一个值为 0 的虚拟头节点 dummy，并将其 next 指向原链表的头节点 head。</span></span><br><span class="line">    <span class="comment">//这样，即使需要删除头节点，也能方便地处理。</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">dummy</span> <span class="operator">=</span>  <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">    dummy.next = head;</span><br><span class="line">    <span class="comment">//临时指针 curr用于遍历链表</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">curr</span> <span class="operator">=</span> dummy;</span><br><span class="line">    <span class="keyword">while</span>(curr.next != <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(curr.next.val == val)&#123;</span><br><span class="line">            curr.next = curr.next.next;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            curr = curr.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="707-设计链表"><a href="#707-设计链表" class="headerlink" title="707.设计链表"></a>707.设计链表</h5><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-linked-list/description/">https://leetcode.cn/problems/design-linked-list/description/</a></p>
+<p>你可以选择使用单链表或者双链表，设计并实现自己的链表。</p>
+<p>单链表中的节点应该具备两个属性：<code>val</code> 和 <code>next</code> 。<code>val</code> 是当前节点的值，<code>next</code> 是指向下一个节点的指针&#x2F;引用。</p>
+<p>如果是双向链表，则还需要属性 <code>prev</code> 以指示链表中的上一个节点。假设链表中的所有节点下标从 <strong>0</strong> 开始。</p>
+<p>实现 <code>MyLinkedList</code> 类：</p>
+<ul>
+<li><code>MyLinkedList()</code> 初始化 <code>MyLinkedList</code> 对象。</li>
+<li><code>int get(int index)</code> 获取链表中下标为 <code>index</code> 的节点的值。如果下标无效，则返回 <code>-1</code> 。</li>
+<li><code>void addAtHead(int val)</code> 将一个值为 <code>val</code> 的节点插入到链表中第一个元素之前。在插入完成后，新节点会成为链表的第一个节点。</li>
+<li><code>void addAtTail(int val)</code> 将一个值为 <code>val</code> 的节点追加到链表中作为链表的最后一个元素。</li>
+<li><code>void addAtIndex(int index, int val)</code> 将一个值为 <code>val</code> 的节点插入到链表中下标为 <code>index</code> 的节点之前。如果 <code>index</code> 等于链表的长度，那么该节点会被追加到链表的末尾。如果 <code>index</code> 比长度更大，该节点将 <strong>不会插入</strong> 到链表中。</li>
+<li><code>void deleteAtIndex(int index)</code> 如果下标有效，则删除链表中下标为 <code>index</code> 的节点。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">	输入</span></span><br><span class="line"><span class="code">[&quot;MyLinkedList&quot;, &quot;addAtHead&quot;, &quot;addAtTail&quot;, &quot;addAtIndex&quot;, &quot;get&quot;, &quot;deleteAtIndex&quot;, &quot;get&quot;]</span></span><br><span class="line"><span class="code">[[], [1], [3], [1, 2], [1], [1], [1]]</span></span><br><span class="line"><span class="code">	输出</span></span><br><span class="line"><span class="code">[null, null, null, null, 2, null, 3]</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">	解释</span></span><br><span class="line"><span class="code">MyLinkedList myLinkedList = new MyLinkedList();</span></span><br><span class="line"><span class="code">myLinkedList.addAtHead(1);</span></span><br><span class="line"><span class="code">myLinkedList.addAtTail(3);</span></span><br><span class="line"><span class="code">myLinkedList.addAtIndex(1, 2);    // 链表变为 1-&gt;2-&gt;3</span></span><br><span class="line"><span class="code">myLinkedList.get(1);              // 返回 2</span></span><br><span class="line"><span class="code">myLinkedList.deleteAtIndex(1);    // 现在，链表变为 1-&gt;3</span></span><br><span class="line"><span class="code">myLinkedList.get(1);              // 返回 3</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= index, val &lt;= 1000</code></li>
+<li>请不要使用内置的 LinkedList 库。</li>
+<li>调用 <code>get</code>、<code>addAtHead</code>、<code>addAtTail</code>、<code>addAtIndex</code> 和 <code>deleteAtIndex</code> 的次数不超过 <code>2000</code> 。</li>
+</ul>
+<p><strong>定义一个链表节点类</strong><br>包含节点的值 <code>val</code> 、指向下一个节点的引用 <code>next</code><br>	以及两个成员变量：<code>size</code> 用于存储链表元素的个数，<code>head</code> 记录的是虚拟头结点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ListNode</span> &#123;</span><br><span class="line">     <span class="type">int</span> val;</span><br><span class="line">     ListNode next;</span><br><span class="line">     ListNode(<span class="type">int</span> val) &#123;</span><br><span class="line">         <span class="built_in">this</span>.val=val;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">//size存储链表元素的个数</span></span><br><span class="line"> <span class="keyword">private</span> <span class="type">int</span> size;</span><br><span class="line"> <span class="comment">//注意这里记录的是虚拟头结点</span></span><br><span class="line"> <span class="keyword">private</span> ListNode head;</span><br></pre></td></tr></table></figure>
+
+<p><strong>需要实现功能如下：</strong></p>
+<ul>
+<li>初始化链表</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">MyLinkedList</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.size = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">this</span>.head = <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取第N个节点的值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">    <span class="comment">//如果index非法，返回-1</span></span><br><span class="line">    <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> head;</span><br><span class="line">    <span class="comment">//第0个节点是虚拟头节点，所以查找第 index+1 个节点</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= index; i++) &#123;</span><br><span class="line">        cur = cur.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cur.val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>头部插入节点</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addAtHead</span><span class="params">(<span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">newNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(val);</span><br><span class="line">    newNode.next = head.next;</span><br><span class="line">    head.next = newNode;</span><br><span class="line">    size++;</span><br><span class="line">    <span class="comment">// 在链表最前面插入一个节点，等价于在第0个元素前添加</span></span><br><span class="line">    <span class="comment">// addAtIndex(0, val);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>尾部插入节点</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addAtTail</span><span class="params">(<span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">newNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(val);</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> head;</span><br><span class="line">    <span class="keyword">while</span> (cur.next != <span class="literal">null</span>) &#123;</span><br><span class="line">        cur = cur.next;</span><br><span class="line">    &#125;</span><br><span class="line">    cur.next = newNode;</span><br><span class="line">    size++;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在链表的最后插入一个节点，等价于在(末尾+1)个元素前添加</span></span><br><span class="line">    <span class="comment">// addAtIndex(size, val);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第N个节点前插入节点</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在第 index 个节点之前插入一个新节点，例如index为0，那么新插入的节点为链表的新头节点。</span></span><br><span class="line"><span class="comment">// 如果 index 等于链表的长度，则说明是新插入的节点为链表的尾结点</span></span><br><span class="line"><span class="comment">// 如果 index 大于链表的长度，则返回空</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addAtIndex</span><span class="params">(<span class="type">int</span> index, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt; size) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//找到要插入节点的前驱</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">pre</span> <span class="operator">=</span> head;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index; i++) &#123;</span><br><span class="line">        pre = pre.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">newNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(val);</span><br><span class="line">    newNode.next = pre.next;</span><br><span class="line">    pre.next = newNode;</span><br><span class="line">    size++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除第N个节点</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">deleteAtIndex</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//因为有虚拟头节点，所以不用对index=0的情况进行特殊处理</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">pre</span> <span class="operator">=</span> head;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index ; i++) &#123;</span><br><span class="line">        pre = pre.next;</span><br><span class="line">    &#125;</span><br><span class="line">    pre.next = pre.next.next;</span><br><span class="line">    size--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyLinkedList</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">ListNode</span> &#123;</span><br><span class="line">        <span class="type">int</span> val;</span><br><span class="line">        ListNode next;</span><br><span class="line">        ListNode(<span class="type">int</span> val) &#123;</span><br><span class="line">            <span class="built_in">this</span>.val=val;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//size存储链表元素的个数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> size;</span><br><span class="line">    <span class="comment">//注意这里记录的是虚拟头结点</span></span><br><span class="line">    <span class="keyword">private</span> ListNode head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//初始化链表</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyLinkedList</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.size = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">this</span>.head = <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取第index个节点的数值，注意index是从0开始的，第0个节点就是虚拟头结点</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">        <span class="comment">//如果index非法，返回-1</span></span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="comment">//第0个节点是虚拟头节点，所以查找第 index+1 个节点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= index; i++) &#123;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cur.val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addAtHead</span><span class="params">(<span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">newNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(val);</span><br><span class="line">        newNode.next = head.next;</span><br><span class="line">        head.next = newNode;</span><br><span class="line">        size++;</span><br><span class="line">        <span class="comment">// 在链表最前面插入一个节点，等价于在第0个元素前添加</span></span><br><span class="line">        <span class="comment">// addAtIndex(0, val);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addAtTail</span><span class="params">(<span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">newNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(val);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="keyword">while</span> (cur.next != <span class="literal">null</span>) &#123;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        cur.next = newNode;</span><br><span class="line">        size++;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 在链表的最后插入一个节点，等价于在(末尾+1)个元素前添加</span></span><br><span class="line">        <span class="comment">// addAtIndex(size, val);</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 在第 index 个节点之前插入一个新节点，例如index为0，那么新插入的节点为链表的新头节点。</span></span><br><span class="line">    <span class="comment">// 如果 index 等于链表的长度，则说明是新插入的节点为链表的尾结点</span></span><br><span class="line">    <span class="comment">// 如果 index 大于链表的长度，则返回空</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addAtIndex</span><span class="params">(<span class="type">int</span> index, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt; size) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//找到要插入节点的前驱</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">pre</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index; i++) &#123;</span><br><span class="line">            pre = pre.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">newNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(val);</span><br><span class="line">        newNode.next = pre.next;</span><br><span class="line">        pre.next = newNode;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">deleteAtIndex</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//因为有虚拟头节点，所以不用对index=0的情况进行特殊处理</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">pre</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index ; i++) &#123;</span><br><span class="line">            pre = pre.next;</span><br><span class="line">        &#125;</span><br><span class="line">        pre.next = pre.next.next;</span><br><span class="line">        size--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206.反转链表"></a>206.反转链表</h5><p>给你单链表的头节点 <code>head</code> ，请你反转链表，并返回反转后的链表。</p>
+<p><strong>示例 1：</strong><br><img src="/2025/03/10/2025-03-10-第二章-链表part01/rev1ex1.jpg"  alt="img" style="zoom: 50%;" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5]</span><br><span class="line">输出：[5,4,3,2,1]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong><br><img src="/2025/03/10/2025-03-10-第二章-链表part01/rev1ex2.jpg"  alt="img" style="zoom: 50%;" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2]</span><br><span class="line">输出：[2,1]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点的数目范围是 <code>[0, 5000]</code></li>
+<li><code>-5000 &lt;= Node.val &lt;= 5000</code></li>
+</ul>
+<p><strong>进阶</strong>：链表可以选用迭代或递归方式完成反转。你能否用两种方法解决这道题？</p>
+<p><strong>双指针解法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">reverseList1</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">prev</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> head;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="literal">null</span>; <span class="comment">//定义一个临时指针，用于循环的时候保存下一个节点</span></span><br><span class="line">    <span class="keyword">while</span> (cur != <span class="literal">null</span>) &#123;</span><br><span class="line">        temp = cur.next;</span><br><span class="line">        cur.next = prev;</span><br><span class="line">        prev = cur;</span><br><span class="line">        cur = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>使用<code>cur</code>指向头节点遍历链表，<br><code>prve</code>为当前节点的上一个节点，初值为null —&gt; 链表反转后，原链表头节点的下一个节点为null<br>定义一个临时指针<code>temp</code>，用于循环的时候保存下一个节点</p>
+</li>
+<li><p>每次循环完成如下操作，直至<code>cur</code>循环到null</p>
+<ul>
+<li><strong>暂存下一个节点：</strong> 使用 <code>nextTemp</code> 暂存 <code>curr</code> 的下一个节点，防止链表断裂。</li>
+<li><strong>反转指针：</strong> 将 <code>curr</code> 的 <code>next</code> 指向 <code>prev</code>，实现当前节点指针反转。</li>
+<li><strong>移动指针：</strong> 将 <code>prev</code> 移动到 <code>curr</code>，<code>curr</code> 移动到 <code>nextTemp</code>，即下一个节点。</li>
+</ul>
+</li>
+<li><p>遍历结束后，<code>prev</code> 即为新的头节点，返回 <code>prev</code></p>
+</li>
+</ul>
+<img src="/2025/03/10/2025-03-10-第二章-链表part01/screenshot_2025_03_12T16_42_01+0800.png"  alt="screenshot_2025_03_12T16_42_01+0800" style="zoom:33%;" />
+
+
+
+<p><strong>递归解法</strong></p>
+<p><strong>递归解法在逻辑上和是双指针法等效的</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">reverseList2</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> reverse(<span class="literal">null</span>, head);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> ListNode <span class="title function_">reverse</span><span class="params">(ListNode prev, ListNode cur)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (cur == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> prev;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    temp = cur.next;</span><br><span class="line">    cur.next = prev;</span><br><span class="line">    <span class="comment">// 更新prev、cur位置</span></span><br><span class="line">    <span class="comment">// prev = cur;</span></span><br><span class="line">    <span class="comment">// cur = temp;</span></span><br><span class="line">    <span class="keyword">return</span> reverse(cur, temp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>递归终止条件：</strong> 当链表为空（<code>head == null</code>）或仅有一个节点（<code>head.next == null</code>）时，直接返回该节点作为新的头节点。</li>
+<li><strong>递归调用：</strong> 对 <code>head.next</code> 进行递归调用，反转剩余的链表，返回新的头节点 <code>newHead</code>。</li>
+<li><strong>反转指针：</strong> 将当前节点的下一个节点的 <code>next</code> 指向当前节点，即 <code>head.next.next = head</code>，实现当前节点与下一个节点的连接反转。</li>
+<li><strong>断开连接：</strong> 将当前节点的 <code>next</code> 设为 <code>null</code>，断开原始链表中当前节点与下一个节点的连接，防止形成环。</li>
+<li><strong>返回新头节点：</strong> 递归完成后，<code>newHead</code> 即为反转后的新头节点，返回 <code>newHead</code>。</li>
+</ul>
+<p>两种写法时间复杂度都为: O(n)；<br>双指针空间复杂度为: O(1)、递归写法空间复杂度: O(n), 递归调用了 n 层栈空间；</p>
+<h3 id="第二章-链表part02"><a href="#第二章-链表part02" class="headerlink" title="第二章 链表part02"></a>第二章 链表part02</h3><h5 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24.两两交换链表中的节点"></a>24.两两交换链表中的节点</h5><h5 id="19-删除链表的倒数第N个节点"><a href="#19-删除链表的倒数第N个节点" class="headerlink" title="19.删除链表的倒数第N个节点"></a>19.删除链表的倒数第N个节点</h5><h5 id="面试题-02-07-链表相交"><a href="#面试题-02-07-链表相交" class="headerlink" title="面试题 02.07. 链表相交"></a>面试题 02.07. 链表相交</h5><h5 id="142-环形链表II"><a href="#142-环形链表II" class="headerlink" title="142.环形链表II"></a>142.环形链表II</h5><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +529,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-10 15:56:15" itemprop="dateModified" datetime="2025-03-10T15:56:15+08:00">2025-03-10</time>
+                <time title="修改时间：2025-03-11 10:33:38" itemprop="dateModified" datetime="2025-03-11T10:33:38+08:00">2025-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -355,13 +694,30 @@
 </li>
 <li>虽然算法中可能存在嵌套的 while 循环，但这两个指针都是单向向右移动的，<br>每个元素最多被访问两次（一次被右指针访问，另一次被左指针访问）。<br>因此，总的操作次数不会超过 2n 次，时间复杂度为 O(n)。</li>
 </ul>
-<img src="/2025/03/07/2025-03-07-第一章-数组part01-数组part02/screenshot_2025_03_10T15_50_50+0800.png"  alt="screenshot_2025_03_10T15_50_50+0800" style="zoom: 25%;" />
+<img src="/2025/03/07/2025-03-07-第一章-数组part01-数组part02/滑动窗口.png"  alt="滑动窗口" style="zoom:25%;" />
 
 <p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1tZ4y1q7XE">https://www.bilibili.com/video/BV1tZ4y1q7XE</a></p>
 <h5 id="59-螺旋矩阵II"><a href="#59-螺旋矩阵II" class="headerlink" title="59.螺旋矩阵II"></a><strong>59.螺旋矩阵II</strong></h5><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix-ii/">https://leetcode.cn/problems/spiral-matrix-ii/</a></p>
+<p>给你一个正整数 <code>n</code> ，生成一个包含 1 到 n<sup>2</sup> 所有元素，且元素按顺时针顺序螺旋排列的 <code>n x n</code> 正方形矩阵 <code>matrix</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<img src="/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/spiraln.jpg" class="" title="img">
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3</span><br><span class="line">输出：[[1,2,3],[8,9,4],[7,6,5]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 1</span><br><span class="line">输出：[[1]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 20</code></li>
+</ul>
+<p><strong>循环不变量</strong>：尽量使用一个规则处理边界—&gt;此处采用左闭右开处理<br><img src="/2025/03/07/2025-03-07-第一章-数组part01-数组part02/螺旋矩阵.png"  alt="螺旋矩阵" style="zoom:25%;" /></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>[][] generateMatrix (<span class="type">int</span> n) &#123;</span><br><span class="line">    <span class="type">int</span>[][] nums = <span class="keyword">new</span> <span class="title class_">int</span>[n][n];</span><br><span class="line">    <span class="type">int</span> <span class="variable">startX</span> <span class="operator">=</span> <span class="number">0</span>, startY = <span class="number">0</span>;  <span class="comment">// 每一圈的起始点</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">offset</span> <span class="operator">=</span> <span class="number">1</span>;	<span class="comment">// 终止位置随每圈循环递减</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;  <span class="comment">// 矩阵中需要填写的数字</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">loop</span> <span class="operator">=</span> <span class="number">1</span>; <span class="comment">// 记录当前的圈数</span></span><br><span class="line">    <span class="type">int</span> i, j; <span class="comment">// j 代表列, i 代表行;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (loop &lt;= n / <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="comment">// 顶部	左闭右开，所以判断循环结束时， j 不能等于 n - offset</span></span><br><span class="line">        <span class="keyword">for</span> (j = startY; j &lt; n - offset; j++) &#123;</span><br><span class="line">            nums[startX][j] = count++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 右列	左闭右开，所以判断循环结束时， i 不能等于 n - offset</span></span><br><span class="line">        <span class="keyword">for</span> (i = startX; i &lt; n - offset; i++) &#123;</span><br><span class="line">            nums[i][j] = count++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 底部	左闭右开，所以判断循环结束时， j != startY</span></span><br><span class="line">        <span class="keyword">for</span> (; j &gt; startY; j--) &#123;</span><br><span class="line">            nums[i][j] = count++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 左列	左闭右开，所以判断循环结束时， i != startX</span></span><br><span class="line">        <span class="keyword">for</span> (; i &gt; startX; i--) &#123;</span><br><span class="line">            nums[i][j] = count++;</span><br><span class="line">        &#125;</span><br><span class="line">        startX++;</span><br><span class="line">        startY++;</span><br><span class="line">        offset++;</span><br><span class="line">        loop++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n % <span class="number">2</span> == <span class="number">1</span>) &#123; <span class="comment">// n 为奇数时，单独处理矩阵中心的值</span></span><br><span class="line">        nums[startX][startY] = count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1SL4y1N7mV/">https://www.bilibili.com/video/BV1SL4y1N7mV/</a></p>
-<h5 id="58-区间和"><a href="#58-区间和" class="headerlink" title="58.区间和"></a><strong>58.区间和</strong></h5><p><strong>前缀和是一种思维巧妙很实用 而且 很有容易理解的一种算法思想，大家可以体会一下</strong></p>
-<h5 id="44-开发商购买土地"><a href="#44-开发商购买土地" class="headerlink" title="44.开发商购买土地"></a>44.<strong>开发商购买土地</strong></h5><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3>
+<h5 id="58-区间和"><a href="#58-区间和" class="headerlink" title="58.区间和"></a><strong>58.区间和</strong></h5><h5 id="44-开发商购买土地"><a href="#44-开发商购买土地" class="headerlink" title="44.开发商购买土地"></a>44.<strong>开发商购买土地</strong></h5><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3>
       
     </div>
 
@@ -678,7 +1034,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-10 10:08:00" itemprop="dateModified" datetime="2025-03-10T10:08:00+08:00">2025-03-10</time>
+                <time title="修改时间：2025-03-12 14:49:55" itemprop="dateModified" datetime="2025-03-12T14:49:55+08:00">2025-03-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -2579,6 +2935,181 @@
 </ul>
 </li>
 </ul>
+<h3 id="Day20"><a href="#Day20" class="headerlink" title="Day20"></a>Day20</h3><h4 id="Redis的数据类型有那些？"><a href="#Redis的数据类型有那些？" class="headerlink" title="Redis的数据类型有那些？"></a>Redis的数据类型有那些？</h4><p>常见的五种数据类型：<strong>String（字符串），Hash（哈希），List（列表），Set（集合）及 Zset(sorted set：有序集合)</strong>。</p>
+<ul>
+<li>字符串<code>STRING</code>：存储字符串数据，最基本的数据类型。</li>
+<li>哈希表<code>HASH</code>：存储字段和值的映射，用于存储对象。</li>
+<li>列表<code>LIST</code>：存储有序的字符串元素列表。</li>
+<li>集合<code>SET</code>：存储唯一的字符串元素，无序。</li>
+<li>有序集合<code>ZSET</code>：类似于集合，但每个元素都关联一个分数，可以按分数进行排序。</li>
+</ul>
+<p>Redis版本更新后增加了几种数据类型，</p>
+<ul>
+<li><code>BitMap</code>: 存储位的数据结构，可以用于处理一些位运算操作。</li>
+<li><code>HyperLogLog</code>：用于基数估算的数据结构，用于统计元素的唯一数量。</li>
+<li><code>GEO</code>： 存储地理位置信息的数据结构。</li>
+<li><code>Stream</code>：专门为消息队列设计的数据类型。</li>
+</ul>
+<h4 id="Redis是单线程的还是多线程的，为什么？"><a href="#Redis是单线程的还是多线程的，为什么？" class="headerlink" title="Redis是单线程的还是多线程的，为什么？"></a>Redis是单线程的还是多线程的，为什么？</h4><p>Redis 的线程模型经历了从单线程到多线程的演进。<br>在 Redis 6.0 之前，主要采用单线程模型，这意味着所有客户端请求都由一个主线程处理。这种设计有以下优点：</p>
+<ul>
+<li><strong>简化模型</strong>：单线程模型简化了并发控制，避免了多线程同步问题，降低了开发复杂性。</li>
+<li><strong>性能优化</strong>：由于操作主要在内存中进行，单线程避免了线程切换和锁竞争的开销。</li>
+<li><strong>原子性保证</strong>：单线程执行确保了操作的原子性，简化了事务和持久化的实现。</li>
+<li><strong>顺序执行</strong>：单线程保证了请求的顺序执行。</li>
+</ul>
+<p>但是Redis的单线程模型并不意味着它在处理客户端请求时不高效。实际上，由于其操作主要在内存中进行，Redis能够提供极高的吞吐量和低延迟的响应。</p>
+<p>然而，随着业务需求的增长和技术的演进，Redis 在 6.0 版本引入了多线程模型。<br>新的多线程模型将网络 I&#x2F;O 操作分担到多个线程中，提升了处理高并发请求的能力，但核心数据操作仍然是单线程执行，以保持其原子性和一致性。</p>
+<h4 id="说一说Redis持久化机制有哪些"><a href="#说一说Redis持久化机制有哪些" class="headerlink" title="说一说Redis持久化机制有哪些"></a>说一说Redis持久化机制有哪些</h4><p>Redis 提供了两种主要的持久化机制：<strong>RDB（Redis Database）</strong> 和 <strong>AOF（Append Only File）</strong>。<br>此外，从 Redis 4.0 开始，引入了<strong>混合持久化</strong>方式。</p>
+<ul>
+<li><p><strong>RDB（Redis Database）快照</strong></p>
+<ul>
+<li><p><strong>将某一时刻的内存数据，以二进制的方式写入磁盘；</strong></p>
+</li>
+<li><p><strong>优点</strong>：</p>
+<ul>
+<li><strong>紧凑性</strong>：RDB 文件为紧凑的二进制文件，适合备份和传输。</li>
+<li><strong>快速恢复</strong>：使用 RDB 文件恢复数据比 AOF 更快。</li>
+<li><strong>性能影响小</strong>：RDB 通过子进程执行快照操作，主进程不进行 I&#x2F;O 操作，确保高性能。</li>
+</ul>
+</li>
+<li><p><strong>缺点</strong>：</p>
+<ul>
+<li><strong>数据丢失风险</strong>：由于快照在特定时间点生成，如果 Redis 意外宕机，可能会丢失最近一次快照后的数据。</li>
+<li><strong>阻塞问题</strong>：在执行 <code>SAVE</code> 命令时，Redis 会阻塞，可能影响性能。</li>
+</ul>
+</li>
+<li><p><strong>触发方式</strong>：</p>
+<ul>
+<li><strong>手动触发</strong>：使用 <code>SAVE</code>（同步阻塞）或 <code>BGSAVE</code>（后台异步）命令。</li>
+<li><strong>自动触发</strong>：通过配置文件设置条件，如 <code>save &lt;seconds&gt; &lt;changes&gt;</code>，在指定时间内发生指定次数的写操作时触发。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>AOF（Append Only File）日志</strong></p>
+<ul>
+<li><strong>每执行一条写操作命令，就把该命令以追加的方式写入到一个文件里</strong></li>
+<li><strong>优点</strong>：<ul>
+<li><strong>更高的数据安全性</strong>：AOF 可以根据配置实现更频繁的持久化，减少数据丢失风险。</li>
+<li><strong>可读性强</strong>：AOF 文件以文本形式记录命令，便于审查和修改。</li>
+<li><strong>可修复性</strong>：即使 AOF 文件末尾损坏，Redis 也能通过内置工具修复。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：<ul>
+<li><strong>文件体积大</strong>：相比 RDB，AOF 文件通常更大。</li>
+<li><strong>恢复速度慢</strong>：由于需要重放所有写操作，AOF 恢复数据的速度比 RDB 慢。</li>
+<li><strong>性能影响</strong>：频繁的写操作可能影响 Redis 性能。</li>
+</ul>
+</li>
+<li><strong>触发方式</strong>：<ul>
+<li><strong>配置文件设置</strong>：通过 <code>appendonly yes</code> 启用 AOF，并设置 <code>appendfsync</code> 参数来控制持久化频率，如 <code>always</code>（每次写操作后）、<code>everysec</code>（每秒）或 <code>no</code>（由操作系统决定）。</li>
+<li><strong>手动触发</strong>：使用 <code>BGREWRITEAOF</code> 命令对 AOF 文件进行重写，以压缩文件大小。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>混合持久化</strong></p>
+<ul>
+<li><strong>概念</strong>：从 Redis 4.0 开始，支持将 <strong>RDB 快照和 AOF 日志结合</strong>起来的混合持久化方式。</li>
+<li><strong>优点</strong>：<ul>
+<li><strong>兼具 RDB 和 AOF 的优点</strong>：既有 RDB 的快速恢复能力，又有 AOF 的高数据安全性。</li>
+<li><strong>减少 AOF 文件大小</strong>：通过将 RDB 快照作为 AOF 文件的开头，减少了 AOF 文件的体积。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：<ul>
+<li><strong>实现复杂性增加</strong>：混合持久化的实现增加了系统的复杂性。</li>
+</ul>
+</li>
+<li><strong>触发方式</strong>：<ul>
+<li><strong>配置文件设置</strong>：通过设置 <code>aof-use-rdb-preamble yes</code> 启用混合持久化。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>RDB</strong> 适合需要快速恢复和对数据一致性要求不高的场景，而 <strong>AOF</strong> 更适合需要高数据安全性的场景。<br><strong>混合持久化方式</strong>则兼顾了两者的优点，适用于对数据安全性和恢复速度都有较高要求的场景。</p>
+<h3 id="Day22"><a href="#Day22" class="headerlink" title="Day22"></a>Day22</h3><h4 id="介绍一下Redis缓存雪崩和缓存穿透，如何解决这些问题？"><a href="#介绍一下Redis缓存雪崩和缓存穿透，如何解决这些问题？" class="headerlink" title="介绍一下Redis缓存雪崩和缓存穿透，如何解决这些问题？"></a>介绍一下Redis缓存雪崩和缓存穿透，如何解决这些问题？</h4><p>在使用 Redis 作为缓存时，可能会遇到 <strong>缓存雪崩</strong>、<strong>缓存击穿</strong> 和 <strong>缓存穿透</strong> 三种问题。了解它们的定义、成因及解决方案，有助于保障系统的稳定性和性能。</p>
+<p><strong>1. 缓存雪崩</strong></p>
+<ul>
+<li><strong>定义</strong>：缓存雪崩是指在某一时间点，缓存中大量数据同时失效，导致大量请求直接访问数据库，造成数据库压力骤增，甚至可能引发系统崩溃。</li>
+<li><strong>原因</strong>：<ul>
+<li>大量缓存设置了相同的过期时间，导致它们在同一时间失效。</li>
+<li>缓存服务器宕机或不可用，导致所有请求直接访问数据库。</li>
+</ul>
+</li>
+<li><strong>解决方案</strong>：<ul>
+<li><strong>设置不同的过期时间</strong>：为缓存添加随机的过期时间，避免大量缓存同时失效。例如，在原有过期时间基础上增加一个随机值，使缓存失效时间分散。</li>
+<li><strong>缓存预热</strong>：在系统上线前，将热点数据提前加载到缓存中，避免在高并发访问时直接请求数据库。</li>
+<li><strong>构建高可用缓存集群</strong>：通过主从复制、哨兵模式或集群模式，提升缓存系统的可用性，避免因缓存服务器宕机导致的雪崩。</li>
+<li><strong>请求限流或熔断</strong>：在缓存失效或不可用时，对请求进行限流或熔断，防止大量请求涌向数据库，保护数据库的稳定性。</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 缓存击穿</strong></p>
+<ul>
+<li><strong>定义</strong>：缓存击穿是指缓存中某个热点数据在高并发访问下突然失效，导致大量请求直接访问数据库，增加数据库的负载。</li>
+<li><strong>原因</strong>：<ul>
+<li>热点数据在缓存中失效，而此时有大量并发请求访问该数据，导致请求直接访问数据库。</li>
+</ul>
+</li>
+<li><strong>解决方案</strong>：<ul>
+<li><strong>设置热点数据永不过期</strong>：对热点数据设置为永不过期，避免缓存失效引发的击穿问题。</li>
+<li><strong>使用互斥锁</strong>：在缓存失效时，通过加锁机制控制只有一个线程从数据库加载数据并回填缓存，其他线程等待或返回默认值，避免大量并发请求直接访问数据库。</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. 缓存穿透</strong></p>
+<ul>
+<li><strong>定义</strong>：缓存穿透是指查询一个在缓存和数据库中都不存在的数据，这个数据始终无法被缓存，导致每次请求都直接访问数据库，增加数据库的负载。</li>
+<li><strong>原因</strong>：<ul>
+<li>用户请求的数据在缓存和数据库中都不存在，每次请求都绕过缓存直接查询数据库。</li>
+<li>恶意攻击者故意请求不存在的数据，导致大量请求穿透缓存，直接打到数据库。</li>
+</ul>
+</li>
+<li><strong>解决方案</strong>：<ul>
+<li><strong>使用布隆过滤器</strong>：在缓存之前增加布隆过滤器，用于快速判断请求的数据是否存在。如果布隆过滤器判断数据不存在，则直接返回，避免访问数据库。</li>
+<li><strong>缓存空值</strong>：当数据库中查询不到数据时，将空结果也缓存起来，并设置一个较短的过期时间，防止同样的请求频繁访问数据库。</li>
+<li><strong>参数校验</strong>：对用户的请求参数进行校验，过滤掉非法或明显不存在的请求，减少对数据库的无效访问。</li>
+</ul>
+</li>
+</ul>
+<p>针对不同的业务场景，需要选择合适的解决方案。例如，对于可能出现大量缓存同时失效的场景，可以采用设置不同过期时间和缓存预热等策略；而对于可能遭受恶意请求的场景，则可以采用布隆过滤器和参数校验等策略。综合运用多种策略，可以有效保障系统的稳定性和性能。</p>
+<h4 id="如何保证数据库和缓存的一致性"><a href="#如何保证数据库和缓存的一致性" class="headerlink" title="如何保证数据库和缓存的一致性"></a>如何保证数据库和缓存的一致性</h4><p>在使用缓存（如 Redis）来提升系统性能时，由于数据库和缓存之间存在数据同步的延迟或操作顺序问题，可能导致两者数据不一致。</p>
+<p><strong>可能遇到的问题：</strong></p>
+<ol>
+<li><strong>缓存更新延迟</strong>：在更新数据库后，未及时更新或删除缓存，导致缓存中的数据与数据库不一致。</li>
+<li><strong>缓存提前失效</strong>：缓存中的数据在数据库更新前被删除，导致新的缓存数据基于旧的数据库数据生成。</li>
+<li><strong>并发操作冲突</strong>：多个并发操作同时修改数据库和缓存，可能导致数据不一致。</li>
+</ol>
+<p><strong>保证数据库和缓存一致性的常用策略：</strong></p>
+<ul>
+<li><p><strong>Cache Aside（旁路缓存）</strong></p>
+<ul>
+<li><strong>原理</strong>：<br>应用程序首先尝试从缓存读取数据；<br>如果缓存未命中，则从数据库读取数据，并将数据写入缓存。<br>更新数据时，先更新数据库，然后使缓存失效。</li>
+<li><strong>问题</strong>：在高并发场景下，可能出现以下情况：<ul>
+<li><strong>脏读</strong>：一个线程更新数据库后，尚未删除缓存，另一个线程读取到旧的缓存数据。</li>
+<li><strong>缓存污染</strong>：一个线程在缓存未命中时从数据库读取数据，期间另一个线程更新了数据库并使缓存失效，前一个线程可能将旧数据写入缓存，导致缓存数据不一致。</li>
+</ul>
+</li>
+<li><strong>可行性</strong>：上述问题发生的概率较低，因为需要同时满足缓存失效和并发写操作的条件。由于数据库读写速度通常慢于缓存，读操作在写操作之前进入数据库，并在写操作之后更新的概率较低。</li>
+</ul>
+</li>
+<li><p><strong>Read&#x2F;Write Through（读写直通）</strong></p>
+<ul>
+<li><strong>原理</strong>：缓存代理负责更新数据库，应用程序视后端为单一存储，存储系统自行维护缓存。</li>
+<li><strong>Read Through</strong>：在查询操作中更新缓存，即当缓存失效时，由缓存服务自行加载数据，对调用方透明。</li>
+<li><strong>Write Through</strong>：当数据更新时，如果未命中缓存，直接更新数据库并返回；如果命中缓存，则先更新缓存，然后由缓存自行同步更新数据库（同步操作）。</li>
+<li><strong>问题</strong>：Write Through策略可能导致写操作延迟增加，因为每次写操作都需要同步更新数据库，可能影响系统性能。</li>
+</ul>
+</li>
+<li><p><strong>Write Behind（写回）</strong></p>
+<ul>
+<li><strong>原理</strong>：更新数据时，仅更新缓存，不立即更新数据库，缓存会异步批量更新数据库。</li>
+<li><strong>问题</strong>：此设计使数据的I&#x2F;O操作非常快，但带来的问题是数据不是强一致性的，且可能会导致数据丢失。</li>
+<li><strong>可行性</strong>：适用于对数据一致性要求不高的场景，但需要设计可靠的异步批量更新机制，以减少数据丢失的风险。</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -3011,7 +3542,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

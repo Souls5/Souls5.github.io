@@ -29,13 +29,14 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/%E7%AE%97%E6%B3%95%E9%80%9A%E5%85%B3%E6%95%B0%E7%BB%84.png">
 <meta property="og:image" content="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/%E7%AE%97%E6%B3%95%E9%80%9A%E5%85%B3%E6%95%B0%E7%BB%841.png">
-<meta property="og:image" content="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/screenshot_2025_03_10T15_50_50+0800.png">
+<meta property="og:image" content="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.png">
+<meta property="og:image" content="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/spiraln.jpg">
+<meta property="og:image" content="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5.png">
 <meta property="article:published_time" content="2025-03-07T03:55:15.000Z">
-<meta property="article:modified_time" content="2025-03-10T07:56:15.323Z">
+<meta property="article:modified_time" content="2025-03-11T02:33:38.551Z">
 <meta property="article:author" content="间">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="数据结构">
-<meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://souls5.github.io/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/%E7%AE%97%E6%B3%95%E9%80%9A%E5%85%B3%E6%95%B0%E7%BB%84.png">
 
@@ -198,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-10 15:56:15" itemprop="dateModified" datetime="2025-03-10T15:56:15+08:00">2025-03-10</time>
+                <time title="修改时间：2025-03-11 10:33:38" itemprop="dateModified" datetime="2025-03-11T10:33:38+08:00">2025-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -363,13 +364,30 @@
 </li>
 <li>虽然算法中可能存在嵌套的 while 循环，但这两个指针都是单向向右移动的，<br>每个元素最多被访问两次（一次被右指针访问，另一次被左指针访问）。<br>因此，总的操作次数不会超过 2n 次，时间复杂度为 O(n)。</li>
 </ul>
-<img src="/2025/03/07/2025-03-07-第一章-数组part01-数组part02/screenshot_2025_03_10T15_50_50+0800.png"  alt="screenshot_2025_03_10T15_50_50+0800" style="zoom: 25%;" />
+<img src="/2025/03/07/2025-03-07-第一章-数组part01-数组part02/滑动窗口.png"  alt="滑动窗口" style="zoom:25%;" />
 
 <p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1tZ4y1q7XE">https://www.bilibili.com/video/BV1tZ4y1q7XE</a></p>
 <h5 id="59-螺旋矩阵II"><a href="#59-螺旋矩阵II" class="headerlink" title="59.螺旋矩阵II"></a><strong>59.螺旋矩阵II</strong></h5><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix-ii/">https://leetcode.cn/problems/spiral-matrix-ii/</a></p>
+<p>给你一个正整数 <code>n</code> ，生成一个包含 1 到 n<sup>2</sup> 所有元素，且元素按顺时针顺序螺旋排列的 <code>n x n</code> 正方形矩阵 <code>matrix</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<img src="/2025/03/07/2025-03-07-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E7%BB%84part01-%E6%95%B0%E7%BB%84part02/spiraln.jpg" class="" title="img">
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3</span><br><span class="line">输出：[[1,2,3],[8,9,4],[7,6,5]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 1</span><br><span class="line">输出：[[1]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 20</code></li>
+</ul>
+<p><strong>循环不变量</strong>：尽量使用一个规则处理边界—&gt;此处采用左闭右开处理<br><img src="/2025/03/07/2025-03-07-第一章-数组part01-数组part02/螺旋矩阵.png"  alt="螺旋矩阵" style="zoom:25%;" /></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>[][] generateMatrix (<span class="type">int</span> n) &#123;</span><br><span class="line">    <span class="type">int</span>[][] nums = <span class="keyword">new</span> <span class="title class_">int</span>[n][n];</span><br><span class="line">    <span class="type">int</span> <span class="variable">startX</span> <span class="operator">=</span> <span class="number">0</span>, startY = <span class="number">0</span>;  <span class="comment">// 每一圈的起始点</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">offset</span> <span class="operator">=</span> <span class="number">1</span>;	<span class="comment">// 终止位置随每圈循环递减</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;  <span class="comment">// 矩阵中需要填写的数字</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">loop</span> <span class="operator">=</span> <span class="number">1</span>; <span class="comment">// 记录当前的圈数</span></span><br><span class="line">    <span class="type">int</span> i, j; <span class="comment">// j 代表列, i 代表行;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (loop &lt;= n / <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="comment">// 顶部	左闭右开，所以判断循环结束时， j 不能等于 n - offset</span></span><br><span class="line">        <span class="keyword">for</span> (j = startY; j &lt; n - offset; j++) &#123;</span><br><span class="line">            nums[startX][j] = count++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 右列	左闭右开，所以判断循环结束时， i 不能等于 n - offset</span></span><br><span class="line">        <span class="keyword">for</span> (i = startX; i &lt; n - offset; i++) &#123;</span><br><span class="line">            nums[i][j] = count++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 底部	左闭右开，所以判断循环结束时， j != startY</span></span><br><span class="line">        <span class="keyword">for</span> (; j &gt; startY; j--) &#123;</span><br><span class="line">            nums[i][j] = count++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 左列	左闭右开，所以判断循环结束时， i != startX</span></span><br><span class="line">        <span class="keyword">for</span> (; i &gt; startX; i--) &#123;</span><br><span class="line">            nums[i][j] = count++;</span><br><span class="line">        &#125;</span><br><span class="line">        startX++;</span><br><span class="line">        startY++;</span><br><span class="line">        offset++;</span><br><span class="line">        loop++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n % <span class="number">2</span> == <span class="number">1</span>) &#123; <span class="comment">// n 为奇数时，单独处理矩阵中心的值</span></span><br><span class="line">        nums[startX][startY] = count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1SL4y1N7mV/">https://www.bilibili.com/video/BV1SL4y1N7mV/</a></p>
-<h5 id="58-区间和"><a href="#58-区间和" class="headerlink" title="58.区间和"></a><strong>58.区间和</strong></h5><p><strong>前缀和是一种思维巧妙很实用 而且 很有容易理解的一种算法思想，大家可以体会一下</strong></p>
-<h5 id="44-开发商购买土地"><a href="#44-开发商购买土地" class="headerlink" title="44.开发商购买土地"></a>44.<strong>开发商购买土地</strong></h5><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3>
+<h5 id="58-区间和"><a href="#58-区间和" class="headerlink" title="58.区间和"></a><strong>58.区间和</strong></h5><h5 id="44-开发商购买土地"><a href="#44-开发商购买土地" class="headerlink" title="44.开发商购买土地"></a>44.<strong>开发商购买土地</strong></h5><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3>
     </div>
 
     
@@ -380,7 +398,6 @@
           <div class="post-tags">
               <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
               <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
-              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
           </div>
 
         
@@ -392,7 +409,10 @@
     <a href="/2025/03/04/2025-03-04-SELinux%E7%AD%96%E7%95%A5%E5%86%B2%E7%AA%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" rel="prev" title="SELinux策略冲突分析工具的设计与实现">
       <i class="fa fa-chevron-left"></i> SELinux策略冲突分析工具的设计与实现
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2025/03/10/2025-03-10-%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E9%93%BE%E8%A1%A8part01/" rel="next" title="2025-03-11-第二章-链表part01—链表part02">
+      2025-03-11-第二章-链表part01—链表part02 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -467,7 +487,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
