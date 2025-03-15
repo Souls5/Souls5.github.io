@@ -190,7 +190,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-15 14:10:36" itemprop="dateModified" datetime="2025-03-15T14:10:36+08:00">2025-03-15</time>
+                <time title="修改时间：2025-03-15 19:13:31" itemprop="dateModified" datetime="2025-03-15T19:13:31+08:00">2025-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -316,13 +316,22 @@
 <p><strong>数组解法</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] intersection_arr(<span class="type">int</span>[] nums1, <span class="type">int</span>[] nums2) &#123;</span><br><span class="line">    <span class="type">int</span>[] hash1 = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">1002</span>];</span><br><span class="line">    <span class="type">int</span>[] hash2 = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">1002</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : nums1)</span><br><span class="line">        hash1[i]++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : nums2)</span><br><span class="line">        hash2[i]++;</span><br><span class="line">    </span><br><span class="line">    List&lt;Integer&gt; resList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">1002</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (hash1[i] &gt; <span class="number">0</span> &amp;&amp; hash2[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            resList.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> res[] = <span class="keyword">new</span> <span class="title class_">int</span>[resList.size()];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : resList)</span><br><span class="line">        res[index++] = i;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>- </p>
+<ul>
+<li>定义两个数组<code>hash1</code>、<code>hash2</code>，分别<strong>遍历</strong>数组<code>nums1</code>、<code>nums2</code>，更新<strong>hash数组</strong>中第<code>num[i]</code>给元素的值</li>
+<li>定义集合<code>resList</code>，<strong>遍历hash数组</strong>，使用<code>resList</code>存储两<strong>hash数组</strong>中值均不为0的下标索引，即为数组<code>num1</code>、<code>num2</code><strong>交集</strong></li>
+<li>将集合<code>resList</code>转化为数组<code>res</code>，返回数组</li>
+</ul>
 <p><strong>Set解法</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] intersection_set(<span class="type">int</span>[] nums1, <span class="type">int</span>[] nums2) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nums1 == <span class="literal">null</span> || nums1.length == <span class="number">0</span> || nums2 == <span class="literal">null</span> || nums2.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    Set&lt;Integer&gt; set1 = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    Set&lt;Integer&gt; resSet = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">//遍历数组1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i : nums1) &#123;</span><br><span class="line">        set1.add(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//遍历数组2的过程中判断哈希表中是否存在该元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i : nums2) &#123;</span><br><span class="line">        <span class="keyword">if</span> (set1.contains(i)) &#123;</span><br><span class="line">            resSet.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[resSet.size()];</span><br><span class="line">    <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : resSet)&#123;</span><br><span class="line">        arr[j++] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] intersection_set(<span class="type">int</span>[] nums1, <span class="type">int</span>[] nums2) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nums1 == <span class="literal">null</span> || nums1.length == <span class="number">0</span> || nums2 == <span class="literal">null</span> || nums2.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    Set&lt;Integer&gt; set1 = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    Set&lt;Integer&gt; resSet = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">//遍历数组1，将其转化为哈希表</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i : nums1) &#123;</span><br><span class="line">        set1.add(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//遍历数组2，查询哈希表中是否存在该元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i : nums2) &#123;</span><br><span class="line">        <span class="keyword">if</span> (set1.contains(i)) &#123;</span><br><span class="line">            resSet.add(i);<span class="comment">//如果存在，将其添加至集合resSet中</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//将集合转化为数组</span></span><br><span class="line">    <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[resSet.size()];</span><br><span class="line">    <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : resSet)&#123;</span><br><span class="line">        res[j++] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a><strong>Tips</strong></h5><p><strong>增强for循环的使用</strong>：简化数组和集合遍历</p>
+<ul>
+<li><strong>遍历</strong>数组1，将其转化为<strong>Set</strong>结构的哈希表<code>HashSet</code></li>
+<li><strong>遍历</strong>数组2，查询<code>HashSet</code>中是否存在该元素，如果存在，则说明该元素为两数组<strong>交集</strong>，将其添加至集合<code>resSet</code>中</li>
+<li>将<code>resSet</code>转换为数组，返回数组<code>res</code></li>
+</ul>
+<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a><strong>Tips</strong></h5><ul>
+<li><strong>增强for循环的使用</strong>：简化数组和集合遍历</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums1.length; i++) &#123;</span><br><span class="line">    hash1[nums1[i]]++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>等价于：</strong></p>
@@ -330,7 +339,23 @@
 
 
 
-<h5 id="202-快乐数"><a href="#202-快乐数" class="headerlink" title="202. 快乐数"></a>202. 快乐数</h5><p>编写一个算法来判断一个数 <code>n</code> 是不是快乐数。</p>
+<ul>
+<li><strong>数组 or Set？</strong><ul>
+<li><strong>数组</strong>：<ul>
+<li>直接用下标作映射</li>
+<li>数值较大&#x2F;较分散时，数组下标过大，会浪费存储空间</li>
+</ul>
+</li>
+<li><strong>Set</strong>：<ul>
+<li>每插入一个值都需要使用哈希运算将其转变为另一个值，<br>同时还需要开辟一个新空间</li>
+<li>插入值较多时开销较大</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="202-快乐数"><a href="#202-快乐数" class="headerlink" title="202. 快乐数"></a>202. 快乐数</h5><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/happy-number/">https://leetcode.cn/problems/happy-number/</a></p>
+<p>编写一个算法来判断一个数 <code>n</code> 是不是快乐数。</p>
 <p><strong>「快乐数」</strong> 定义为：</p>
 <ul>
 <li>对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。</li>
@@ -346,7 +371,7 @@
 
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>1 &lt;= n &lt;= 231 - 1</code></li>
+<li>1 &lt;&#x3D; n &lt;&#x3D; 2<sup>31</sup> - 1</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isHappy</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        Set&lt;Integer&gt; record = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span> (n != <span class="number">1</span> &amp;&amp; !record.contains(n)) &#123;</span><br><span class="line">            record.add(n);</span><br><span class="line">            n = getNextNumber(n);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getNextNumber</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> n % <span class="number">10</span>;</span><br><span class="line">            res += temp * temp;</span><br><span class="line">            n = n / <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -3459,6 +3484,81 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/new_avatar.png">
+      <meta itemprop="name" content="间">
+      <meta itemprop="description" content="面向就业学习，Java相关技术栈、面试八股文和算法题中...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不是不是">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="post-title-link" itemprop="url">数据结构-数组相关算法题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-02-17 12:00:00" itemprop="dateCreated datePublished" datetime="2025-02-17T12:00:00+08:00">2025-02-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-03-04 14:07:57" itemprop="dateModified" datetime="2025-03-04T14:07:57+08:00">2025-03-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>归档用，每日刷题算法单独</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://programmercarl.com/">https://programmercarl.com</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/02/17/2025-02-17-Redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3584,81 +3684,6 @@
 
 
 <h3 id="三种特殊数据类型"><a href="#三种特殊数据类型" class="headerlink" title="三种特殊数据类型"></a>三种特殊数据类型</h3><h4 id="GEO地理位置"><a href="#GEO地理位置" class="headerlink" title="GEO地理位置"></a>GEO地理位置</h4><h4 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h4><h4 id="BitMap"><a href="#BitMap" class="headerlink" title="BitMap"></a>BitMap</h4><h3 id="配置文件-Redis-conf"><a href="#配置文件-Redis-conf" class="headerlink" title="配置文件 Redis.conf"></a>配置文件 Redis.conf</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/new_avatar.png">
-      <meta itemprop="name" content="间">
-      <meta itemprop="description" content="面向就业学习，Java相关技术栈、面试八股文和算法题中...">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不是不是">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/02/17/2025-02-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="post-title-link" itemprop="url">数据结构-数组相关算法题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-02-17 12:00:00" itemprop="dateCreated datePublished" datetime="2025-02-17T12:00:00+08:00">2025-02-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-04 14:07:57" itemprop="dateModified" datetime="2025-03-04T14:07:57+08:00">2025-03-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>归档用，每日刷题算法单独</p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://programmercarl.com/">https://programmercarl.com</a></p>
-
       
     </div>
 
