@@ -20,23 +20,20 @@
     var CONFIG = {"hostname":"souls5.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="记录2025春招遇到的笔试算法题为主（如果能找到的话… 2025&#x2F;03&#x2F;15美团测开填空2*20，算法20+15+25 算法三道分别是字符串处理，加解密和fab （找到题了再更新… 2025&#x2F;03&#x2F;16 美团后端填空3 * 20，算法2 * 20 第一道大概是这样 应该是哈希，我猜重复一定次数过后就开始循环了，输出循环数组就行了（但是改烦了… 第二道题没怎么">
+  <meta name="description" content="今日任务part01： 344.反转字符串、 541. 反转字符串II、卡码网：54.替换数字 part02：151.翻转字符串里的单词、卡码网：55.右旋转字符串、 28. 实现 strStr()、               459.重复的子字符串、字符串总结 、 双指针回顾  第四章字符串part01344.反转字符串541.反转字符串II卡码网：54.替换数字第四章字符串part02151">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2025-03-15-笔试杂项">
-<meta property="og:url" content="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/index.html">
+<meta property="og:title" content="2025-03-20-第四章-字符串part01-字符串part02">
+<meta property="og:url" content="https://souls5.github.io/2025/03/19/2025-03-19-%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2part01-%E5%AD%97%E7%AC%A6%E4%B8%B2part02/index.html">
 <meta property="og:site_name" content="不是不是">
-<meta property="og:description" content="记录2025春招遇到的笔试算法题为主（如果能找到的话… 2025&#x2F;03&#x2F;15美团测开填空2*20，算法20+15+25 算法三道分别是字符串处理，加解密和fab （找到题了再更新… 2025&#x2F;03&#x2F;16 美团后端填空3 * 20，算法2 * 20 第一道大概是这样 应该是哈希，我猜重复一定次数过后就开始循环了，输出循环数组就行了（但是改烦了… 第二道题没怎么">
+<meta property="og:description" content="今日任务part01： 344.反转字符串、 541. 反转字符串II、卡码网：54.替换数字 part02：151.翻转字符串里的单词、卡码网：55.右旋转字符串、 28. 实现 strStr()、               459.重复的子字符串、字符串总结 、 双指针回顾  第四章字符串part01344.反转字符串541.反转字符串II卡码网：54.替换数字第四章字符串part02151">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/6afde5f2406f53a1d49848691fb6deb.png">
-<meta property="og:image" content="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/QQ%E5%9B%BE%E7%89%8720250316173524.jpg">
-<meta property="article:published_time" content="2025-03-15T11:21:41.000Z">
-<meta property="article:modified_time" content="2025-03-19T08:36:16.555Z">
+<meta property="article:published_time" content="2025-03-19T08:10:04.000Z">
+<meta property="article:modified_time" content="2025-03-19T08:15:32.294Z">
 <meta property="article:author" content="间">
-<meta property="article:tag" content="笔试">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/6afde5f2406f53a1d49848691fb6deb.png">
 
-<link rel="canonical" href="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/">
+<link rel="canonical" href="https://souls5.github.io/2025/03/19/2025-03-19-%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2part01-%E5%AD%97%E7%AC%A6%E4%B8%B2part02/">
 
 
 <script id="page-configurations">
@@ -49,7 +46,7 @@
   };
 </script>
 
-  <title>2025-03-15-笔试杂项 | 不是不是</title>
+  <title>2025-03-20-第四章-字符串part01-字符串part02 | 不是不是</title>
   
 
 
@@ -165,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/">
+    <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/03/19/2025-03-19-%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2part01-%E5%AD%97%E7%AC%A6%E4%B8%B2part02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/new_avatar.png">
@@ -178,7 +175,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          2025-03-15-笔试杂项
+          2025-03-20-第四章-字符串part01-字符串part02
         </h1>
 
         <div class="post-meta">
@@ -187,27 +184,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2025-03-15 19:21:41" itemprop="dateCreated datePublished" datetime="2025-03-15T19:21:41+08:00">2025-03-15</time>
+              <time title="创建时间：2025-03-19 16:10:04 / 修改时间：16:15:32" itemprop="dateCreated datePublished" datetime="2025-03-19T16:10:04+08:00">2025-03-19</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-19 16:36:16" itemprop="dateModified" datetime="2025-03-19T16:36:16+08:00">2025-03-19</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AC%94%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">笔试</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AC%94%E8%AF%95/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -222,23 +209,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>记录2025春招遇到的笔试算法题为主（如果能找到的话…</p>
-<h4 id="2025-03-15美团测开"><a href="#2025-03-15美团测开" class="headerlink" title="2025&#x2F;03&#x2F;15美团测开"></a>2025&#x2F;03&#x2F;15美团测开</h4><p>填空2*20，算法20+15+25</p>
-<p>算法三道分别是字符串处理，加解密和fab</p>
-<p>（找到题了再更新…</p>
-<h4 id="2025-03-16-美团后端"><a href="#2025-03-16-美团后端" class="headerlink" title="2025&#x2F;03&#x2F;16 美团后端"></a>2025&#x2F;03&#x2F;16 美团后端</h4><p>填空3 * 20，算法2 * 20</p>
-<p>第一道大概是这样<br><img src="/2025/03/15/2025-03-15-笔试杂项/6afde5f2406f53a1d49848691fb6deb.png"  alt="6afde5f2406f53a1d49848691fb6deb" style="zoom:60%;" /></p>
-<p>应该是哈希，我猜重复一定次数过后就开始循环了，输出循环数组就行了（但是改烦了…<img src="/2025/03/15/2025-03-15-笔试杂项/QQ图片20250316173524.jpg"  alt="QQ图片20250316173524" style="zoom: 67%;" /></p>
-<p>第二道题没怎么看…</p>
-<h4 id="2025-03-16-深信服Java"><a href="#2025-03-16-深信服Java" class="headerlink" title="2025&#x2F;03&#x2F;16 深信服Java"></a>2025&#x2F;03&#x2F;16 深信服Java</h4><p>填空3*24 算法四道题一共58分</p>
-<p>填空逻辑题和二叉树耽误时间有点多，算法前三道ac，最后一道读懂题目用掉的时间有长没来得及做…</p>
-<h4 id="2025-03-19神州信息Java开发"><a href="#2025-03-19神州信息Java开发" class="headerlink" title="2025&#x2F;03&#x2F;19神州信息Java开发"></a>2025&#x2F;03&#x2F;19神州信息Java开发</h4><p>选择2*35，算法第一道ac，第二道状态不好没做出来</p>
-<h4 id="2025-03-20小天才-步步高Web后台"><a href="#2025-03-20小天才-步步高Web后台" class="headerlink" title="2025&#x2F;03&#x2F;20小天才&amp;步步高Web后台"></a>2025&#x2F;03&#x2F;20小天才&amp;步步高Web后台</h4><h4 id="2025-03-20海康威视测试"><a href="#2025-03-20海康威视测试" class="headerlink" title="2025&#x2F;03&#x2F;20海康威视测试"></a>2025&#x2F;03&#x2F;20海康威视测试</h4><p>结束时间： 2025-03-20 23:59 星期四 </p>
-<h4 id="2025-03-20中科创达Java"><a href="#2025-03-20中科创达Java" class="headerlink" title="2025&#x2F;03&#x2F;20中科创达Java"></a>2025&#x2F;03&#x2F;20中科创达Java</h4><p>结束时间：2025-03-20 23:59  星期四 </p>
-<h4 id="2025-03-20绿盟科技安全服务"><a href="#2025-03-20绿盟科技安全服务" class="headerlink" title="2025&#x2F;03&#x2F;20绿盟科技安全服务"></a>2025&#x2F;03&#x2F;20绿盟科技安全服务</h4><p><strong>考试时间：2025-03-20 19:00:00 – 20:30:00</strong></p>
-<h4 id="2025-03-22-360Web服务端开发"><a href="#2025-03-22-360Web服务端开发" class="headerlink" title="2025&#x2F;03&#x2F;22 360Web服务端开发"></a>2025&#x2F;03&#x2F;22 360Web服务端开发</h4><p>开始时间： 2025-03-22 15:00 星期六（为保证作答时间请在18:00前登陆）</p>
-<p>结束时间： 2025-03-22 20:00 星期六 </p>
-
+        <h3 id="今日任务"><a href="#今日任务" class="headerlink" title="今日任务"></a><strong>今日任务</strong></h3><p>part01： 344.反转字符串、 541. 反转字符串II、卡码网：54.替换数字</p>
+<p>part02：151.翻转字符串里的单词、卡码网：55.右旋转字符串、 28. 实现 strStr()、<br>               459.重复的子字符串、字符串总结 、 双指针回顾 </p>
+<h3 id="第四章字符串part01"><a href="#第四章字符串part01" class="headerlink" title="第四章字符串part01"></a>第四章字符串part01</h3><h5 id="344-反转字符串"><a href="#344-反转字符串" class="headerlink" title="344.反转字符串"></a>344.反转字符串</h5><h5 id="541-反转字符串II"><a href="#541-反转字符串II" class="headerlink" title="541.反转字符串II"></a>541.反转字符串II</h5><h5 id="卡码网：54-替换数字"><a href="#卡码网：54-替换数字" class="headerlink" title="卡码网：54.替换数字"></a>卡码网：54.替换数字</h5><h3 id="第四章字符串part02"><a href="#第四章字符串part02" class="headerlink" title="第四章字符串part02"></a>第四章字符串part02</h3><h5 id="151-翻转字符串里的单词"><a href="#151-翻转字符串里的单词" class="headerlink" title="151.翻转字符串里的单词"></a>151.翻转字符串里的单词</h5><h5 id="卡码网：55-右旋转字符串"><a href="#卡码网：55-右旋转字符串" class="headerlink" title="卡码网：55.右旋转字符串"></a>卡码网：55.右旋转字符串</h5><h5 id="28-实现-strStr"><a href="#28-实现-strStr" class="headerlink" title="28.实现 strStr()"></a>28.实现 strStr()</h5><h5 id="459-重复的子字符串"><a href="#459-重复的子字符串" class="headerlink" title="459.重复的子字符串"></a>459.重复的子字符串</h5><h3 id="字符串总结"><a href="#字符串总结" class="headerlink" title="字符串总结"></a>字符串总结</h3><h3 id="双指针回顾"><a href="#双指针回顾" class="headerlink" title="双指针回顾"></a>双指针回顾</h3><h3 id=""><a href="#" class="headerlink" title=""></a></h3>
     </div>
 
     
@@ -247,7 +220,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E7%AC%94%E8%AF%95/" rel="tag"># 笔试</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
           </div>
 
         
@@ -256,13 +229,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/03/13/2025-03-13-%E5%93%88%E5%B8%8C%E8%A1%A8part01%E2%80%94%E5%93%88%E5%B8%8C%E8%A1%A8part02/" rel="prev" title="2025-03-13-第三章-哈希表part01—哈希表part02">
-      <i class="fa fa-chevron-left"></i> 2025-03-13-第三章-哈希表part01—哈希表part02
+    <a href="/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/" rel="prev" title="2025-03-15-笔试杂项">
+      <i class="fa fa-chevron-left"></i> 2025-03-15-笔试杂项
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/03/19/2025-03-19-%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2part01-%E5%AD%97%E7%AC%A6%E4%B8%B2part02/" rel="next" title="2025-03-20-第四章-字符串part01-字符串part02">
-      2025-03-20-第四章-字符串part01-字符串part02 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -321,7 +291,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-15%E7%BE%8E%E5%9B%A2%E6%B5%8B%E5%BC%80"><span class="nav-number">1.</span> <span class="nav-text">2025&#x2F;03&#x2F;15美团测开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-16-%E7%BE%8E%E5%9B%A2%E5%90%8E%E7%AB%AF"><span class="nav-number">2.</span> <span class="nav-text">2025&#x2F;03&#x2F;16 美团后端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-16-%E6%B7%B1%E4%BF%A1%E6%9C%8DJava"><span class="nav-number">3.</span> <span class="nav-text">2025&#x2F;03&#x2F;16 深信服Java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-19%E7%A5%9E%E5%B7%9E%E4%BF%A1%E6%81%AFJava%E5%BC%80%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">2025&#x2F;03&#x2F;19神州信息Java开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-20%E5%B0%8F%E5%A4%A9%E6%89%8D-%E6%AD%A5%E6%AD%A5%E9%AB%98Web%E5%90%8E%E5%8F%B0"><span class="nav-number">5.</span> <span class="nav-text">2025&#x2F;03&#x2F;20小天才&amp;步步高Web后台</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-20%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86%E6%B5%8B%E8%AF%95"><span class="nav-number">6.</span> <span class="nav-text">2025&#x2F;03&#x2F;20海康威视测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-20%E4%B8%AD%E7%A7%91%E5%88%9B%E8%BE%BEJava"><span class="nav-number">7.</span> <span class="nav-text">2025&#x2F;03&#x2F;20中科创达Java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-20%E7%BB%BF%E7%9B%9F%E7%A7%91%E6%8A%80%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">8.</span> <span class="nav-text">2025&#x2F;03&#x2F;20绿盟科技安全服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-22-360Web%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%BC%80%E5%8F%91"><span class="nav-number">9.</span> <span class="nav-text">2025&#x2F;03&#x2F;22 360Web服务端开发</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">今日任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%97%E7%AC%A6%E4%B8%B2part01"><span class="nav-number">2.</span> <span class="nav-text">第四章字符串part01</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#344-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.0.1.</span> <span class="nav-text">344.反转字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#541-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II"><span class="nav-number">2.0.2.</span> <span class="nav-text">541.反转字符串II</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A54-%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97"><span class="nav-number">2.0.3.</span> <span class="nav-text">卡码网：54.替换数字</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%97%E7%AC%A6%E4%B8%B2part02"><span class="nav-number">3.</span> <span class="nav-text">第四章字符串part02</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#151-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D"><span class="nav-number">3.0.1.</span> <span class="nav-text">151.翻转字符串里的单词</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%A1%E7%A0%81%E7%BD%91%EF%BC%9A55-%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">3.0.2.</span> <span class="nav-text">卡码网：55.右旋转字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#28-%E5%AE%9E%E7%8E%B0-strStr"><span class="nav-number">3.0.3.</span> <span class="nav-text">28.实现 strStr()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#459-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">3.0.4.</span> <span class="nav-text">459.重复的子字符串</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">字符串总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE"><span class="nav-number">5.</span> <span class="nav-text">双指针回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text"></span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -442,7 +412,7 @@
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://souls5.github.io/2025/03/19/2025-03-19-%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2part01-%E5%AD%97%E7%AC%A6%E4%B8%B2part02/',]
       });
       });
   </script>
