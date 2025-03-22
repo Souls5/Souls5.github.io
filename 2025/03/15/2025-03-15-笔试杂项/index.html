@@ -20,21 +20,23 @@
     var CONFIG = {"hostname":"souls5.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="记录2025春招遇到的笔试算法题为主（如果能找到的话… 2025&#x2F;03&#x2F;15美团测开填空2*20，算法20+15+25 算法三道分别是字符串处理，加解密和fab （找到题了再更新… 2025&#x2F;03&#x2F;16 美团后端填空3 * 20，算法2 * 20 第一道大概是这样 应该是哈希，我猜重复一定次数过后就开始循环了，输出循环数组就行了（但是改烦了… 第二道题没怎么">
+  <meta name="description" content="记录2025春招遇到的笔试算法题为主（如果能找到的话… 2025&#x2F;03&#x2F;15美团测开填空2*20，算法20+15+25 算法三道分别是字符串处理，加解密和fab （找到题了再更新… 一、对 快递单号 进行分类，依据不同的格式规则来判断属于哪种类型，若不符合任何规则则判定为 “Invalid” 二、对一个由大小写字母组成的加密字符串 s 进行处理，规则如下：  初始 解密字符串">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2025-03-15-笔试杂项">
 <meta property="og:url" content="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/index.html">
 <meta property="og:site_name" content="不是不是">
-<meta property="og:description" content="记录2025春招遇到的笔试算法题为主（如果能找到的话… 2025&#x2F;03&#x2F;15美团测开填空2*20，算法20+15+25 算法三道分别是字符串处理，加解密和fab （找到题了再更新… 2025&#x2F;03&#x2F;16 美团后端填空3 * 20，算法2 * 20 第一道大概是这样 应该是哈希，我猜重复一定次数过后就开始循环了，输出循环数组就行了（但是改烦了… 第二道题没怎么">
+<meta property="og:description" content="记录2025春招遇到的笔试算法题为主（如果能找到的话… 2025&#x2F;03&#x2F;15美团测开填空2*20，算法20+15+25 算法三道分别是字符串处理，加解密和fab （找到题了再更新… 一、对 快递单号 进行分类，依据不同的格式规则来判断属于哪种类型，若不符合任何规则则判定为 “Invalid” 二、对一个由大小写字母组成的加密字符串 s 进行处理，规则如下：  初始 解密字符串">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/firefox_O70BIMML10.png">
 <meta property="og:image" content="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/6afde5f2406f53a1d49848691fb6deb.png">
 <meta property="og:image" content="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/QQ%E5%9B%BE%E7%89%8720250316173524.jpg">
+<meta property="og:image" content="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/QQ%E5%9B%BE%E7%89%8720250320170904.jpg">
 <meta property="article:published_time" content="2025-03-15T11:21:41.000Z">
-<meta property="article:modified_time" content="2025-03-19T10:08:02.331Z">
+<meta property="article:modified_time" content="2025-03-22T03:01:43.083Z">
 <meta property="article:author" content="间">
 <meta property="article:tag" content="笔试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/6afde5f2406f53a1d49848691fb6deb.png">
+<meta name="twitter:image" content="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/firefox_O70BIMML10.png">
 
 <link rel="canonical" href="https://souls5.github.io/2025/03/15/2025-03-15-%E7%AC%94%E8%AF%95%E6%9D%82%E9%A1%B9/">
 
@@ -195,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-19 18:08:02" itemprop="dateModified" datetime="2025-03-19T18:08:02+08:00">2025-03-19</time>
+                <time title="修改时间：2025-03-22 11:01:43" itemprop="dateModified" datetime="2025-03-22T11:01:43+08:00">2025-03-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -226,20 +228,61 @@
 <h4 id="2025-03-15美团测开"><a href="#2025-03-15美团测开" class="headerlink" title="2025&#x2F;03&#x2F;15美团测开"></a>2025&#x2F;03&#x2F;15美团测开</h4><p>填空2*20，算法20+15+25</p>
 <p>算法三道分别是字符串处理，加解密和fab</p>
 <p>（找到题了再更新…</p>
+<p>一、对 快递单号 进行分类，依据不同的格式规则来判断属于哪种类型，若不符合任何规则则判定为 “Invalid”</p>
+<p>二、对一个由大小写字母组成的加密字符串 <code>s</code> 进行处理，规则如下：</p>
+<ol>
+<li><p>初始 解密字符串 <code>t</code> 为空。</p>
+</li>
+<li><p>遍历 <code>s</code> 的每个字符</p>
+<ul>
+<li><p><code>&#39;R&#39;</code>：将 <code>t</code> 反转。</p>
+</li>
+<li><p><code>&#39;Z&#39;</code></p>
+<p>：撤销上一步操作：</p>
+<ul>
+<li>如果上一步是 <code>&#39;R&#39;</code>，撤销反转。</li>
+<li>如果上一步是普通字符，删除该字符。</li>
+<li>如果 <code>t</code> 为空，则忽略 <code>&#39;Z&#39;</code> 操作。</li>
+</ul>
+</li>
+<li><p>其他普通字符追加到 <code>t</code> 末尾。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>三、给定一个函数 <code>f(a, b)</code>：</p>
+<ul>
+<li>若 <code>a</code> 是 <code>b</code> 的倍数，则 <code>f(a, b) = 1</code></li>
+<li>否则 <code>f(a, b) = 0</code></li>
+</ul>
+<p>目标是计算：<img src="/2025/03/15/2025-03-15-笔试杂项/firefox_O70BIMML10.png"  alt="firefox_O70BIMML10" style="zoom:50%;" /></p>
+<p>即，遍历所有 <code>(i, j)</code> 组合，<strong>统计 <code>i</code> 是 <code>j</code> 倍数的数量</strong>。</p>
+<p>(主要是时间复杂度不太好压…</p>
 <h4 id="2025-03-16-美团后端"><a href="#2025-03-16-美团后端" class="headerlink" title="2025&#x2F;03&#x2F;16 美团后端"></a>2025&#x2F;03&#x2F;16 美团后端</h4><p>填空3 * 20，算法2 * 20</p>
 <p>第一道大概是这样<br><img src="/2025/03/15/2025-03-15-笔试杂项/6afde5f2406f53a1d49848691fb6deb.png"  alt="6afde5f2406f53a1d49848691fb6deb" style="zoom:60%;" /></p>
 <p>应该是哈希，我猜重复一定次数过后就开始循环了，输出循环数组就行了（但是改烦了…<img src="/2025/03/15/2025-03-15-笔试杂项/QQ图片20250316173524.jpg"  alt="QQ图片20250316173524" style="zoom: 67%;" /></p>
 <p>第二道题没怎么看…</p>
 <h4 id="2025-03-16-深信服Java"><a href="#2025-03-16-深信服Java" class="headerlink" title="2025&#x2F;03&#x2F;16 深信服Java"></a>2025&#x2F;03&#x2F;16 深信服Java</h4><p>填空3*24 算法四道题一共58分</p>
 <p>填空逻辑题和二叉树耽误时间有点多，算法前三道ac，最后一道读懂题目用掉的时间有长没来得及做…</p>
+<p><strong>一、计算字符串中不同字符的个数</strong></p>
+<p>只输出个数，使用哈希法即可</p>
+<p><strong>二、字符串的全排列，要求输出所有可能的出栈顺序，</strong></p>
+<p>模拟栈操作，可以使用<strong>回溯法 + 栈</strong>来生成所有可能的出栈顺序</p>
+<p><strong>三、给定一个未排序的整数数组，要求找到最长的连续递减子序列的长度</strong></p>
+<p>滑动窗口&#x2F;双指针 可解</p>
+<p><strong>四、给定 n 个任务，每个任务有一个 执行时间，需要在这些任务中选取 k 个任务进行编辑（由两个人共同完成）。</strong><br><strong>目标是合理分配任务，使得两个人的最大工作时间尽可能小（即负载均衡）。</strong></p>
+<p>二分 + 动态规划（前缀和）&#x2F;贪心 可解</p>
+<p>（可惜速度慢了…</p>
 <h4 id="2025-03-19神州信息Java开发"><a href="#2025-03-19神州信息Java开发" class="headerlink" title="2025&#x2F;03&#x2F;19神州信息Java开发"></a>2025&#x2F;03&#x2F;19神州信息Java开发</h4><p>选择2*35，算法第一道ac，第二道状态不好没做出来</p>
-<h4 id="2025-03-20小天才-步步高Web后台"><a href="#2025-03-20小天才-步步高Web后台" class="headerlink" title="2025&#x2F;03&#x2F;20小天才&amp;步步高Web后台"></a>2025&#x2F;03&#x2F;20小天才&amp;步步高Web后台</h4><h4 id="2025-03-20海康威视测试"><a href="#2025-03-20海康威视测试" class="headerlink" title="2025&#x2F;03&#x2F;20海康威视测试"></a>2025&#x2F;03&#x2F;20海康威视测试</h4><p>结束时间： 2025-03-20 23:59 星期四 </p>
-<h4 id="2025-03-20中科创达Java"><a href="#2025-03-20中科创达Java" class="headerlink" title="2025&#x2F;03&#x2F;20中科创达Java"></a>2025&#x2F;03&#x2F;20中科创达Java</h4><p>结束时间：2025-03-20 23:59  星期四 </p>
-<h4 id="2025-03-20绿盟科技安全服务"><a href="#2025-03-20绿盟科技安全服务" class="headerlink" title="2025&#x2F;03&#x2F;20绿盟科技安全服务"></a>2025&#x2F;03&#x2F;20绿盟科技安全服务</h4><p><strong>考试时间：2025-03-20 19:00:00 – 20:30:00</strong></p>
+<h4 id="2025-03-20小天才-步步高Web后台"><a href="#2025-03-20小天才-步步高Web后台" class="headerlink" title="2025&#x2F;03&#x2F;20小天才&amp;步步高Web后台"></a>2025&#x2F;03&#x2F;20小天才&amp;步步高Web后台</h4><p>单选+多选+填空3道	常规八股</p>
+<h4 id="2025-03-20海康威视测试"><a href="#2025-03-20海康威视测试" class="headerlink" title="2025&#x2F;03&#x2F;20海康威视测试"></a>2025&#x2F;03&#x2F;20海康威视测试</h4><p>单选、多选、问答两道看着像场景题、算法题第一道返回素数，第二道螺旋数组</p>
+<p>不难，但是只能用python…这下拼尽全力无法回忆起了<br><img src="/2025/03/15/2025-03-15-笔试杂项/QQ图片20250320170904.jpg"  alt="QQ图片20250320170904" style="zoom:33%;" /></p>
+<h4 id="2025-03-20中科创达Java"><a href="#2025-03-20中科创达Java" class="headerlink" title="2025&#x2F;03&#x2F;20中科创达Java"></a>2025&#x2F;03&#x2F;20中科创达Java</h4><p>单选+多选+判断 常规八股、外加5道意义不明的行测图推，一共45道题</p>
 <h4 id="2025-03-22-360Web服务端开发"><a href="#2025-03-22-360Web服务端开发" class="headerlink" title="2025&#x2F;03&#x2F;22 360Web服务端开发"></a>2025&#x2F;03&#x2F;22 360Web服务端开发</h4><p>开始时间： 2025-03-22 15:00 星期六（为保证作答时间请在18:00前登陆）</p>
 <p>结束时间： 2025-03-22 20:00 星期六 </p>
 <h4 id="2025-03-22-小米-运维开发-测试开发-？"><a href="#2025-03-22-小米-运维开发-测试开发-？" class="headerlink" title="2025&#x2F;03&#x2F;22 小米 运维开发&#x2F;测试开发 ？"></a>2025&#x2F;03&#x2F;22 小米 运维开发&#x2F;测试开发 ？</h4><p>开始时间：2025-03-22 19:00 星期六</p>
 <p>结束时间：2025-03-22 20:30 星期六</p>
+<h4 id="2025-03-25-西山居-游戏功能测试-国风武侠项目"><a href="#2025-03-25-西山居-游戏功能测试-国风武侠项目" class="headerlink" title="2025&#x2F;03&#x2F;25 西山居 游戏功能测试-国风武侠项目"></a>2025&#x2F;03&#x2F;25 西山居 游戏功能测试-国风武侠项目</h4><p>考试时间：2025-03-23 10:00:00-2025-03-23 13:00:00</p>
 
     </div>
 
@@ -323,7 +366,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-15%E7%BE%8E%E5%9B%A2%E6%B5%8B%E5%BC%80"><span class="nav-number">1.</span> <span class="nav-text">2025&#x2F;03&#x2F;15美团测开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-16-%E7%BE%8E%E5%9B%A2%E5%90%8E%E7%AB%AF"><span class="nav-number">2.</span> <span class="nav-text">2025&#x2F;03&#x2F;16 美团后端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-16-%E6%B7%B1%E4%BF%A1%E6%9C%8DJava"><span class="nav-number">3.</span> <span class="nav-text">2025&#x2F;03&#x2F;16 深信服Java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-19%E7%A5%9E%E5%B7%9E%E4%BF%A1%E6%81%AFJava%E5%BC%80%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">2025&#x2F;03&#x2F;19神州信息Java开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-20%E5%B0%8F%E5%A4%A9%E6%89%8D-%E6%AD%A5%E6%AD%A5%E9%AB%98Web%E5%90%8E%E5%8F%B0"><span class="nav-number">5.</span> <span class="nav-text">2025&#x2F;03&#x2F;20小天才&amp;步步高Web后台</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-20%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86%E6%B5%8B%E8%AF%95"><span class="nav-number">6.</span> <span class="nav-text">2025&#x2F;03&#x2F;20海康威视测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-20%E4%B8%AD%E7%A7%91%E5%88%9B%E8%BE%BEJava"><span class="nav-number">7.</span> <span class="nav-text">2025&#x2F;03&#x2F;20中科创达Java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-20%E7%BB%BF%E7%9B%9F%E7%A7%91%E6%8A%80%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">8.</span> <span class="nav-text">2025&#x2F;03&#x2F;20绿盟科技安全服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-22-360Web%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%BC%80%E5%8F%91"><span class="nav-number">9.</span> <span class="nav-text">2025&#x2F;03&#x2F;22 360Web服务端开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-22-%E5%B0%8F%E7%B1%B3-%E8%BF%90%E7%BB%B4%E5%BC%80%E5%8F%91-%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91-%EF%BC%9F"><span class="nav-number">10.</span> <span class="nav-text">2025&#x2F;03&#x2F;22 小米 运维开发&#x2F;测试开发 ？</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-15%E7%BE%8E%E5%9B%A2%E6%B5%8B%E5%BC%80"><span class="nav-number">1.</span> <span class="nav-text">2025&#x2F;03&#x2F;15美团测开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-16-%E7%BE%8E%E5%9B%A2%E5%90%8E%E7%AB%AF"><span class="nav-number">2.</span> <span class="nav-text">2025&#x2F;03&#x2F;16 美团后端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-16-%E6%B7%B1%E4%BF%A1%E6%9C%8DJava"><span class="nav-number">3.</span> <span class="nav-text">2025&#x2F;03&#x2F;16 深信服Java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-19%E7%A5%9E%E5%B7%9E%E4%BF%A1%E6%81%AFJava%E5%BC%80%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">2025&#x2F;03&#x2F;19神州信息Java开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-20%E5%B0%8F%E5%A4%A9%E6%89%8D-%E6%AD%A5%E6%AD%A5%E9%AB%98Web%E5%90%8E%E5%8F%B0"><span class="nav-number">5.</span> <span class="nav-text">2025&#x2F;03&#x2F;20小天才&amp;步步高Web后台</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-20%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86%E6%B5%8B%E8%AF%95"><span class="nav-number">6.</span> <span class="nav-text">2025&#x2F;03&#x2F;20海康威视测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-20%E4%B8%AD%E7%A7%91%E5%88%9B%E8%BE%BEJava"><span class="nav-number">7.</span> <span class="nav-text">2025&#x2F;03&#x2F;20中科创达Java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-22-360Web%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%BC%80%E5%8F%91"><span class="nav-number">8.</span> <span class="nav-text">2025&#x2F;03&#x2F;22 360Web服务端开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-22-%E5%B0%8F%E7%B1%B3-%E8%BF%90%E7%BB%B4%E5%BC%80%E5%8F%91-%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91-%EF%BC%9F"><span class="nav-number">9.</span> <span class="nav-text">2025&#x2F;03&#x2F;22 小米 运维开发&#x2F;测试开发 ？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025-03-25-%E8%A5%BF%E5%B1%B1%E5%B1%85-%E6%B8%B8%E6%88%8F%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95-%E5%9B%BD%E9%A3%8E%E6%AD%A6%E4%BE%A0%E9%A1%B9%E7%9B%AE"><span class="nav-number">10.</span> <span class="nav-text">2025&#x2F;03&#x2F;25 西山居 游戏功能测试-国风武侠项目</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -339,7 +382,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
