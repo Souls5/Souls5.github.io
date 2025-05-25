@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/web-app-manifest-192x192.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-96x96.png">
+  <link rel="mask-icon" href="/images/favicon/favicon.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"souls5.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="代码随想录二叉树理论基础 第六章二叉树part01理论基础需要了解 二叉树的种类，存储方式，遍历方式 以及二叉树的定义  递归遍历 （必须掌握）二叉树的三种递归遍历掌握其规律后，其实很简单  迭代遍历 （基础不好的录友，迭代法可以放过）统一迭代   （基础不好的录友，迭代法可以放过）这是统一迭代法的写法， 如果学有余力，可以掌握一下 层序遍历看完本篇可以一口气刷十道题，试一试， 层序遍历并不难，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025-04-01-第六章-二叉树part01-二叉树part08">
+<meta property="og:url" content="https://souls5.github.io/2025/04/01/2025-04-01-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E4%BA%8C%E5%8F%89%E6%A0%91part01-%E4%BA%8C%E5%8F%89%E6%A0%91part08/index.html">
+<meta property="og:site_name" content="不是不是">
+<meta property="og:description" content="代码随想录二叉树理论基础 第六章二叉树part01理论基础需要了解 二叉树的种类，存储方式，遍历方式 以及二叉树的定义  递归遍历 （必须掌握）二叉树的三种递归遍历掌握其规律后，其实很简单  迭代遍历 （基础不好的录友，迭代法可以放过）统一迭代   （基础不好的录友，迭代法可以放过）这是统一迭代法的写法， 如果学有余力，可以掌握一下 层序遍历看完本篇可以一口气刷十道题，试一试， 层序遍历并不难，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-01T05:59:15.000Z">
+<meta property="article:modified_time" content="2025-04-01T06:15:08.862Z">
+<meta property="article:author" content="间">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://souls5.github.io/2025/04/01/2025-04-01-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E4%BA%8C%E5%8F%89%E6%A0%91part01-%E4%BA%8C%E5%8F%89%E6%A0%91part08/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>2025-04-01-第六章-二叉树part01-二叉树part08 | 不是不是</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">不是不是</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录学习、挣扎和一些无关紧要的琐事...大概</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://souls5.github.io/2025/04/01/2025-04-01-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E4%BA%8C%E5%8F%89%E6%A0%91part01-%E4%BA%8C%E5%8F%89%E6%A0%91part08/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/new_avatar.png">
+      <meta itemprop="name" content="间">
+      <meta itemprop="description" content="面向就业学习，Java相关技术栈、面试八股文和算法题中...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不是不是">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2025-04-01-第六章-二叉树part01-二叉树part08
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-04-01 13:59:15 / 修改时间：14:15:08" itemprop="dateCreated datePublished" datetime="2025-04-01T13:59:15+08:00">2025-04-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://programmercarl.com/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE"> 代码随想录二叉树理论基础</a></p>
+<h2 id="第六章二叉树part01"><a href="#第六章二叉树part01" class="headerlink" title="第六章二叉树part01"></a>第六章二叉树part01</h2><h4 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a><strong>理论基础</strong></h4><p>需要了解 二叉树的种类，存储方式，遍历方式 以及二叉树的定义 </p>
+<h4 id="递归遍历-（必须掌握）"><a href="#递归遍历-（必须掌握）" class="headerlink" title="递归遍历 （必须掌握）"></a><strong>递归遍历 （必须掌握）</strong></h4><p>二叉树的三种递归遍历掌握其规律后，其实很简单 </p>
+<h4 id="迭代遍历-（基础不好的录友，迭代法可以放过）"><a href="#迭代遍历-（基础不好的录友，迭代法可以放过）" class="headerlink" title="迭代遍历 （基础不好的录友，迭代法可以放过）"></a><strong>迭代遍历 （基础不好的录友，迭代法可以放过）</strong></h4><h4 id="统一迭代-（基础不好的录友，迭代法可以放过）"><a href="#统一迭代-（基础不好的录友，迭代法可以放过）" class="headerlink" title="统一迭代   （基础不好的录友，迭代法可以放过）"></a><strong>统一迭代   （基础不好的录友，迭代法可以放过）</strong></h4><p>这是统一迭代法的写法， 如果学有余力，可以掌握一下</p>
+<h4 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a><strong>层序遍历</strong></h4><p>看完本篇可以一口气刷十道题，试一试， 层序遍历并不难，大家可以很快刷了十道题。</p>
+<h2 id="第六章二叉树part02"><a href="#第六章二叉树part02" class="headerlink" title="第六章二叉树part02"></a>第六章二叉树part02</h2><h5 id="226-翻转二叉树-（优先掌握递归）"><a href="#226-翻转二叉树-（优先掌握递归）" class="headerlink" title="226.翻转二叉树 （优先掌握递归）"></a>226.翻转二叉树 （优先掌握递归）</h5><p>这道题目 一些做过的同学 理解的也不够深入，建议大家先看我的视频讲解，无论做过没做过，都会有很大收获。</p>
+<h5 id="101-对称二叉树-（优先掌握递归）"><a href="#101-对称二叉树-（优先掌握递归）" class="headerlink" title="101. 对称二叉树 （优先掌握递归）"></a>101. 对称二叉树 （优先掌握递归）</h5><p>先看视频讲解，会更容易一些。 </p>
+<h5 id="104-二叉树的最大深度-（优先掌握递归）"><a href="#104-二叉树的最大深度-（优先掌握递归）" class="headerlink" title="104.二叉树的最大深度 （优先掌握递归）"></a>104.二叉树的最大深度 （优先掌握递归）</h5><p>什么是深度，什么是高度，如何求深度，如何求高度，这里有关系到二叉树的遍历方式。</p>
+<p>大家 要先看视频讲解，就知道以上我说的内容了，很多录友刷过这道题，但理解的还不够。</p>
+<h5 id="111-二叉树的最小深度-（优先掌握递归）"><a href="#111-二叉树的最小深度-（优先掌握递归）" class="headerlink" title="111.二叉树的最小深度 （优先掌握递归）"></a>111.二叉树的最小深度 （优先掌握递归）</h5><p>先看视频讲解，和最大深度 看似差不多，其实 差距还挺大，有坑。</p>
+<h2 id="第六章二叉树part03"><a href="#第六章二叉树part03" class="headerlink" title="第六章二叉树part03"></a>第六章二叉树part03</h2><p><strong>迭代法，大家可以直接过，二刷有精力的时候 再去掌握迭代法。</strong></p>
+<h5 id="110-平衡二叉树-（优先掌握递归）"><a href="#110-平衡二叉树-（优先掌握递归）" class="headerlink" title="110.平衡二叉树 （优先掌握递归）"></a>110.平衡二叉树 （优先掌握递归）</h5><p>再一次涉及到，什么是高度，什么是深度，可以巩固一下。</p>
+<h5 id="257-二叉树的所有路径-（优先掌握递归）"><a href="#257-二叉树的所有路径-（优先掌握递归）" class="headerlink" title="257. 二叉树的所有路径 （优先掌握递归）"></a>257. 二叉树的所有路径 （优先掌握递归）</h5><p>这是大家第一次接触到回溯的过程， 我在视频里重点讲解了 本题为什么要有回溯，已经回溯的过程。 </p>
+<p>如果对回溯 似懂非懂，没关系， 可以先有个印象。 </p>
+<h5 id="404-左叶子之和-（优先掌握递归）"><a href="#404-左叶子之和-（优先掌握递归）" class="headerlink" title="404.左叶子之和 （优先掌握递归）"></a>404.左叶子之和 （优先掌握递归）</h5><p>其实本题有点文字游戏搞清楚什么是左叶子，剩下的就是二叉树的基本操作。 </p>
+<h5 id="222-完全二叉树的节点个数（优先掌握递归）"><a href="#222-完全二叉树的节点个数（优先掌握递归）" class="headerlink" title="222.完全二叉树的节点个数（优先掌握递归）"></a>222.完全二叉树的节点个数（优先掌握递归）</h5><p>需要了解，普通二叉树 怎么求，完全二叉树又怎么求</p>
+<h2 id="第六章二叉树part04"><a href="#第六章二叉树part04" class="headerlink" title="第六章二叉树part04"></a>第六章二叉树part04</h2><h5 id="找树左下角的值"><a href="#找树左下角的值" class="headerlink" title="找树左下角的值"></a>找树左下角的值</h5><p>本题递归偏难，反而迭代简单属于模板题， 两种方法掌握一下 </p>
+<h5 id="路径总和"><a href="#路径总和" class="headerlink" title="路径总和"></a>路径总和</h5><p>本题 又一次涉及到回溯的过程，而且回溯的过程隐藏的还挺深，建议先看视频来理解 </p>
+<p>\112. 路径总和，和 113. 路径总和ii 一起做了。 优先掌握递归法。</p>
+<h5 id="从中序与后序遍历序列构造二叉树"><a href="#从中序与后序遍历序列构造二叉树" class="headerlink" title="从中序与后序遍历序列构造二叉树"></a>从中序与后序遍历序列构造二叉树</h5><p>106.从中序与后序遍历序列构造二叉树，105.从前序与中序遍历序列构造二叉树 一起做，思路一样的</p>
+<h2 id="第六章二叉树part05"><a href="#第六章二叉树part05" class="headerlink" title="第六章二叉树part05"></a>第六章二叉树part05</h2><h5 id="654-最大二叉树"><a href="#654-最大二叉树" class="headerlink" title="654.最大二叉树"></a>654.最大二叉树</h5><p>又是构造二叉树，昨天大家刚刚做完 中序后序确定二叉树，今天做这个 应该会容易一些， 先看视频，好好体会一下 为什么构造二叉树都是 前序遍历 </p>
+<h5 id="617-合并二叉树"><a href="#617-合并二叉树" class="headerlink" title="617.合并二叉树"></a>617.合并二叉树</h5><p>这次是一起操作两个二叉树了， 估计大家也没一起操作过两个二叉树，也不知道该如何一起操作，可以看视频先理解一下。 优先掌握递归。</p>
+<h5 id="700-二叉搜索树中的搜索"><a href="#700-二叉搜索树中的搜索" class="headerlink" title="700.二叉搜索树中的搜索"></a>700.二叉搜索树中的搜索</h5><p>递归和迭代 都可以掌握以下，因为本题比较简单， 了解一下 二叉搜索树的特性</p>
+<h5 id="98-验证二叉搜索树"><a href="#98-验证二叉搜索树" class="headerlink" title="98.验证二叉搜索树"></a>98.验证二叉搜索树</h5><p>遇到 搜索树，一定想着中序遍历，这样才能利用上特性。 </p>
+<p>但本题是有陷阱的，可以自己先做一做，然后在看题解，看看自己是不是掉陷阱里了。这样理解的更深刻。</p>
+<h2 id="第六章二叉树part06"><a href="#第六章二叉树part06" class="headerlink" title="第六章二叉树part06"></a>第六章二叉树part06</h2><h5 id="530-二叉搜索树的最小绝对差"><a href="#530-二叉搜索树的最小绝对差" class="headerlink" title="530.二叉搜索树的最小绝对差"></a>530.二叉搜索树的最小绝对差</h5><p>需要领悟一下二叉树遍历上双指针操作，优先掌握递归 </p>
+<h5 id="501-二叉搜索树中的众数"><a href="#501-二叉搜索树中的众数" class="headerlink" title="501.二叉搜索树中的众数"></a>501.二叉搜索树中的众数</h5><p>和 530差不多双指针思路，不过 这里涉及到一个很巧妙的代码技巧。</p>
+<h5 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236. 二叉树的最近公共祖先"></a>236. 二叉树的最近公共祖先</h5><p>本题其实是比较难的，可以先看我的视频讲解 </p>
+<h2 id="第六章二叉树part07"><a href="#第六章二叉树part07" class="headerlink" title="第六章二叉树part07"></a>第六章二叉树part07</h2><h5 id="235-二叉搜索树的最近公共祖先"><a href="#235-二叉搜索树的最近公共祖先" class="headerlink" title="235. 二叉搜索树的最近公共祖先"></a>235. 二叉搜索树的最近公共祖先</h5><p>相对于 二叉树的最近公共祖先 本题就简单一些了，因为 可以利用二叉搜索树的特性。 </p>
+<h5 id="701-二叉搜索树中的插入操作"><a href="#701-二叉搜索树中的插入操作" class="headerlink" title="701.二叉搜索树中的插入操作"></a>701.二叉搜索树中的插入操作</h5><p>本题比想象中的简单，大家可以先自己想一想应该怎么做，然后看视频讲解，就发现 本题为什么比较简单了。</p>
+<h5 id="450-删除二叉搜索树中的节点"><a href="#450-删除二叉搜索树中的节点" class="headerlink" title="450.删除二叉搜索树中的节点"></a>450.删除二叉搜索树中的节点</h5><p>相对于 插入操作，本题就有难度了，涉及到改树的结构 </p>
+<h2 id="第六章二叉树part08"><a href="#第六章二叉树part08" class="headerlink" title="第六章二叉树part08"></a>第六章二叉树part08</h2><h5 id="669-修剪二叉搜索树"><a href="#669-修剪二叉搜索树" class="headerlink" title="669. 修剪二叉搜索树"></a><strong>669. 修剪二叉搜索树</strong></h5><p><strong>这道题目比较难</strong>，比 添加增加和删除节点难的多，建议先看视频理解。</p>
+<h5 id="108-将有序数组转换为二叉搜索树"><a href="#108-将有序数组转换为二叉搜索树" class="headerlink" title="108.将有序数组转换为二叉搜索树"></a>108.将有序数组转换为二叉搜索树</h5><p>本题就简单一些，可以尝试先自己做做。</p>
+<h5 id="538-把二叉搜索树转换为累加树"><a href="#538-把二叉搜索树转换为累加树" class="headerlink" title="538.把二叉搜索树转换为累加树"></a>538.把二叉搜索树转换为累加树</h5><p>本题也不难，在 求二叉搜索树的最小绝对差 和 众数 那两道题目 都讲过了 双指针法，思路是一样的。</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h4 id="总结篇"><a href="#总结篇" class="headerlink" title="总结篇"></a>总结篇</h4>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/03/28/2025-03-28-%E6%97%A5%E7%A8%8B%E8%AE%B0%E5%BD%95%EF%BC%88%E6%9D%82%E8%B0%88-%E7%A2%8E%E7%A2%8E%E5%BF%B5%E8%AF%B4%E6%98%AF/" rel="prev" title="2025-03-28-日程记录（笔面试/碎碎念说是...">
+      <i class="fa fa-chevron-left"></i> 2025-03-28-日程记录（笔面试/碎碎念说是...
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%BA%8C%E5%8F%89%E6%A0%91part01"><span class="nav-number">1.</span> <span class="nav-text">第六章二叉树part01</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="nav-number">1.0.1.</span> <span class="nav-text">理论基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86-%EF%BC%88%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%EF%BC%89"><span class="nav-number">1.0.2.</span> <span class="nav-text">递归遍历 （必须掌握）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E9%81%8D%E5%8E%86-%EF%BC%88%E5%9F%BA%E7%A1%80%E4%B8%8D%E5%A5%BD%E7%9A%84%E5%BD%95%E5%8F%8B%EF%BC%8C%E8%BF%AD%E4%BB%A3%E6%B3%95%E5%8F%AF%E4%BB%A5%E6%94%BE%E8%BF%87%EF%BC%89"><span class="nav-number">1.0.3.</span> <span class="nav-text">迭代遍历 （基础不好的录友，迭代法可以放过）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E8%BF%AD%E4%BB%A3-%EF%BC%88%E5%9F%BA%E7%A1%80%E4%B8%8D%E5%A5%BD%E7%9A%84%E5%BD%95%E5%8F%8B%EF%BC%8C%E8%BF%AD%E4%BB%A3%E6%B3%95%E5%8F%AF%E4%BB%A5%E6%94%BE%E8%BF%87%EF%BC%89"><span class="nav-number">1.0.4.</span> <span class="nav-text">统一迭代   （基础不好的录友，迭代法可以放过）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-number">1.0.5.</span> <span class="nav-text">层序遍历</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%BA%8C%E5%8F%89%E6%A0%91part02"><span class="nav-number">2.</span> <span class="nav-text">第六章二叉树part02</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#226-%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91-%EF%BC%88%E4%BC%98%E5%85%88%E6%8E%8C%E6%8F%A1%E9%80%92%E5%BD%92%EF%BC%89"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">226.翻转二叉树 （优先掌握递归）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#101-%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91-%EF%BC%88%E4%BC%98%E5%85%88%E6%8E%8C%E6%8F%A1%E9%80%92%E5%BD%92%EF%BC%89"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">101. 对称二叉树 （优先掌握递归）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#104-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6-%EF%BC%88%E4%BC%98%E5%85%88%E6%8E%8C%E6%8F%A1%E9%80%92%E5%BD%92%EF%BC%89"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">104.二叉树的最大深度 （优先掌握递归）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#111-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6-%EF%BC%88%E4%BC%98%E5%85%88%E6%8E%8C%E6%8F%A1%E9%80%92%E5%BD%92%EF%BC%89"><span class="nav-number">2.0.0.4.</span> <span class="nav-text">111.二叉树的最小深度 （优先掌握递归）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%BA%8C%E5%8F%89%E6%A0%91part03"><span class="nav-number">3.</span> <span class="nav-text">第六章二叉树part03</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#110-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91-%EF%BC%88%E4%BC%98%E5%85%88%E6%8E%8C%E6%8F%A1%E9%80%92%E5%BD%92%EF%BC%89"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">110.平衡二叉树 （优先掌握递归）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#257-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84-%EF%BC%88%E4%BC%98%E5%85%88%E6%8E%8C%E6%8F%A1%E9%80%92%E5%BD%92%EF%BC%89"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">257. 二叉树的所有路径 （优先掌握递归）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#404-%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C-%EF%BC%88%E4%BC%98%E5%85%88%E6%8E%8C%E6%8F%A1%E9%80%92%E5%BD%92%EF%BC%89"><span class="nav-number">3.0.0.3.</span> <span class="nav-text">404.左叶子之和 （优先掌握递归）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#222-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E8%8A%82%E7%82%B9%E4%B8%AA%E6%95%B0%EF%BC%88%E4%BC%98%E5%85%88%E6%8E%8C%E6%8F%A1%E9%80%92%E5%BD%92%EF%BC%89"><span class="nav-number">3.0.0.4.</span> <span class="nav-text">222.完全二叉树的节点个数（优先掌握递归）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%BA%8C%E5%8F%89%E6%A0%91part04"><span class="nav-number">4.</span> <span class="nav-text">第六章二叉树part04</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%BE%E6%A0%91%E5%B7%A6%E4%B8%8B%E8%A7%92%E7%9A%84%E5%80%BC"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">找树左下角的值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">路径总和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8E%E4%B8%AD%E5%BA%8F%E4%B8%8E%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">4.0.0.3.</span> <span class="nav-text">从中序与后序遍历序列构造二叉树</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%BA%8C%E5%8F%89%E6%A0%91part05"><span class="nav-number">5.</span> <span class="nav-text">第六章二叉树part05</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#654-%E6%9C%80%E5%A4%A7%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">654.最大二叉树</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#617-%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">617.合并二叉树</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#700-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%90%9C%E7%B4%A2"><span class="nav-number">5.0.0.3.</span> <span class="nav-text">700.二叉搜索树中的搜索</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#98-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">5.0.0.4.</span> <span class="nav-text">98.验证二叉搜索树</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%BA%8C%E5%8F%89%E6%A0%91part06"><span class="nav-number">6.</span> <span class="nav-text">第六章二叉树part06</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#530-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%9D%E5%AF%B9%E5%B7%AE"><span class="nav-number">6.0.0.1.</span> <span class="nav-text">530.二叉搜索树的最小绝对差</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#501-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E4%BC%97%E6%95%B0"><span class="nav-number">6.0.0.2.</span> <span class="nav-text">501.二叉搜索树中的众数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#236-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88"><span class="nav-number">6.0.0.3.</span> <span class="nav-text">236. 二叉树的最近公共祖先</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%BA%8C%E5%8F%89%E6%A0%91part07"><span class="nav-number">7.</span> <span class="nav-text">第六章二叉树part07</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#235-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88"><span class="nav-number">7.0.0.1.</span> <span class="nav-text">235. 二叉搜索树的最近公共祖先</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#701-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">7.0.0.2.</span> <span class="nav-text">701.二叉搜索树中的插入操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#450-%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9"><span class="nav-number">7.0.0.3.</span> <span class="nav-text">450.删除二叉搜索树中的节点</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%BA%8C%E5%8F%89%E6%A0%91part08"><span class="nav-number">8.</span> <span class="nav-text">第六章二叉树part08</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#669-%E4%BF%AE%E5%89%AA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">8.0.0.1.</span> <span class="nav-text">669. 修剪二叉搜索树</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#108-%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">8.0.0.2.</span> <span class="nav-text">108.将有序数组转换为二叉搜索树</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#538-%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91"><span class="nav-number">8.0.0.3.</span> <span class="nav-text">538.把二叉搜索树转换为累加树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">8.1.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E7%AF%87"><span class="nav-number">8.1.1.</span> <span class="nav-text">总结篇</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="间"
+      src="/images/new_avatar.png">
+  <p class="site-author-name" itemprop="name">间</p>
+  <div class="site-description" itemprop="description">面向就业学习，Java相关技术栈、面试八股文和算法题中...</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">间</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://souls5.github.io/2025/04/01/2025-04-01-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E4%BA%8C%E5%8F%89%E6%A0%91part01-%E4%BA%8C%E5%8F%89%E6%A0%91part08/',]
+      });
+      });
+  </script>
+
+</body>
+</html>
